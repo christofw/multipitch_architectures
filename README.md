@@ -15,6 +15,8 @@ This repository only contains exemplary code and pre-trained models for most of 
 * [Choral Singing Dataset](https://zenodo.org/record/2649950#.Yd_3hWhKhaQ)
   
 For details and references, please see the paper.
+  
+In addition, we provide information on version duplicates in MusicNet (_MusicNet_stats.md_) and detailed information on the different training-test splits used in our experiments (as _JSON_ and _Markdown_ files in folder _dataset_splits_).
 
 # Feature extraction and prediction (Jupyter notebooks)
 
@@ -197,4 +199,4 @@ Experiments from __Section IV.E (Fig. 7) - Cross-Dataset Study on Big Mix Datase
 Run scripts using e.g. the following commands:  
 __conda activate multipitch_architectures__  
 __export CUDA_VISIBLE_DEVICES=1__  
-__python experiments/exp112aS_schubert_nooverlap_segmmodel__  
+__python experiments/Exp1_SectionIV-B/exp126a_musicnet_cnn_basic.py
