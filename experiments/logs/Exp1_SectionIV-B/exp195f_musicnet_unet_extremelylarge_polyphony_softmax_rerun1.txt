@@ -1,0 +1,586 @@
+2021-12-19 14:16:40 | INFO : Logging experiment exp195f_traintest_musicnet_aligned_pitch_unet_extremelylarge_polyphonyclassif_test10files_augall_AdamW_betterratio_softmax_rerun1
+2021-12-19 14:16:40 | INFO : Experiment config: do training = True
+2021-12-19 14:16:40 | INFO : Experiment config: do validation = True
+2021-12-19 14:16:40 | INFO : Experiment config: do testing = True
+2021-12-19 14:16:40 | INFO : Training set parameters: {'context': 75, 'stride': 50, 'compression': 10, 'aug:transpsemitones': 5, 'aug:randomeq': 20, 'aug:noisestd': 0.0001, 'aug:tuning': True}
+2021-12-19 14:16:40 | INFO : Validation set parameters: {'context': 75, 'stride': 50, 'compression': 10}
+2021-12-19 14:16:40 | INFO : Test set parameters: {'context': 75, 'stride': 1, 'compression': 10}
+2021-12-19 14:16:40 | INFO : Training parameters: {'batch_size': 25, 'shuffle': True, 'num_workers': 16}
+2021-12-19 14:16:40 | INFO : Trained model saved in /tsi/clusterhome/cweiss/models/exp195f_traintest_musicnet_aligned_pitch_unet_extremelylarge_polyphonyclassif_test10files_augall_AdamW_betterratio_softmax_rerun1.pt
+2021-12-19 14:16:40 | INFO :  --- Training config: ----------------------------------------- 
+2021-12-19 14:16:40 | INFO : Maximum number of epochs: 100
+2021-12-19 14:16:40 | INFO : Criterion 1 :  BCELoss
+2021-12-19 14:16:40 | INFO : Criterion 2 :  CrossEntropyLoss
+2021-12-19 14:16:40 | INFO : Optimizer parameters: {'name': 'AdamW', 'initial_lr': 0.001, 'betas': (0.9, 0.999), 'eps': 1e-08, 'weight_decay': 0.01, 'amsgrad': False}
+2021-12-19 14:16:40 | INFO : Scheduler parameters: {'use_scheduler': True, 'name': 'ReduceLROnPlateau', 'mode': 'min', 'factor': 0.5, 'patience': 5, 'threshold': 0.0001, 'threshold_mode': 'rel', 'cooldown': 0, 'min_lr': 1e-06, 'eps': 1e-08, 'verbose': False}
+2021-12-19 14:16:40 | INFO : Early stopping parameters: {'use_early_stopping': True, 'mode': 'min', 'min_delta': 1e-05, 'patience': 12, 'percentage': False}
+2021-12-19 14:16:40 | INFO : Test parameters: {'batch_size': 50, 'shuffle': False, 'num_workers': 8}
+2021-12-19 14:16:40 | INFO : Save filewise results = True, in folder /tsi/clusterhome/cweiss/code/deep_pitch_estimation/experiments/results_filewise/exp195f_traintest_musicnet_aligned_pitch_unet_extremelylarge_polyphonyclassif_test10files_augall_AdamW_betterratio_softmax_rerun1.csv
+2021-12-19 14:16:40 | INFO : Save model predictions = True, in folder /tsi/clusterhome/cweiss/predictions/exp195f_traintest_musicnet_aligned_pitch_unet_extremelylarge_polyphonyclassif_test10files_augall_AdamW_betterratio_softmax_rerun1
+2021-12-19 14:16:40 | INFO : CUDA use_cuda: True
+2021-12-19 14:16:40 | INFO : CUDA device: cuda:0
+2021-12-19 14:16:48 | INFO :  --- Model config: -------------------------------------------- 
+2021-12-19 14:16:48 | INFO : Model: simple_u_net_polyphony_classif_softmax
+2021-12-19 14:16:48 | INFO : Model parameters: {'n_chan_input': 6, 'n_chan_layers': [128, 180, 150, 100], 'n_ch_out': 2, 'n_bins_in': 216, 'n_bins_out': 72, 'a_lrelu': 0.3, 'p_dropout': 0.2, 'scalefac': 2, 'num_polyphony_steps': 24}
+2021-12-19 14:16:50 | INFO : 
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+├─LayerNorm: 1-1                         [1, 174, 6, 216]          2,592
+├─double_conv: 1-2                       [1, 32, 174, 216]         --
+|    └─Sequential: 2-1                   [1, 32, 174, 216]         --
+|    |    └─Conv2d: 3-1                  [1, 32, 174, 216]         43,232
+|    |    └─BatchNorm2d: 3-2             [1, 32, 174, 216]         64
+|    |    └─ReLU: 3-3                    [1, 32, 174, 216]         --
+|    |    └─Dropout: 3-4                 [1, 32, 174, 216]         --
+|    |    └─Conv2d: 3-5                  [1, 32, 174, 216]         230,432
+|    |    └─BatchNorm2d: 3-6             [1, 32, 174, 216]         64
+|    |    └─ReLU: 3-7                    [1, 32, 174, 216]         --
+|    |    └─Dropout: 3-8                 [1, 32, 174, 216]         --
+├─Sequential: 1-3                        [1, 64, 87, 108]          --
+|    └─MaxPool2d: 2-2                    [1, 32, 87, 108]          --
+|    └─double_conv: 2-3                  [1, 64, 87, 108]          --
+|    |    └─Sequential: 3-9              [1, 64, 87, 108]          1,382,784
+├─Sequential: 1-4                        [1, 128, 43, 54]          --
+|    └─MaxPool2d: 2-4                    [1, 64, 43, 54]           --
+|    └─double_conv: 2-5                  [1, 128, 43, 54]          --
+|    |    └─Sequential: 3-10             [1, 128, 43, 54]          1,991,424
+├─Sequential: 1-5                        [1, 256, 21, 27]          --
+|    └─MaxPool2d: 2-6                    [1, 128, 21, 27]          --
+|    └─double_conv: 2-7                  [1, 256, 21, 27]          --
+|    |    └─Sequential: 3-11             [1, 256, 21, 27]          2,459,136
+├─Sequential: 1-6                        [1, 256, 10, 13]          --
+|    └─MaxPool2d: 2-8                    [1, 256, 10, 13]          --
+|    └─double_conv: 2-9                  [1, 256, 10, 13]          --
+|    |    └─Sequential: 3-12             [1, 256, 10, 13]          1,181,184
+├─unet_up_concat_padding: 1-7            [1, 512, 21, 27]          --
+|    └─Upsample: 2-10                    [1, 256, 20, 26]          --
+├─double_conv: 1-8                       [1, 128, 21, 27]          --
+|    └─Sequential: 2-11                  [1, 128, 21, 27]          --
+|    |    └─Conv2d: 3-13                 [1, 256, 21, 27]          1,179,904
+|    |    └─BatchNorm2d: 3-14            [1, 256, 21, 27]          512
+|    |    └─ReLU: 3-15                   [1, 256, 21, 27]          --
+|    |    └─Dropout: 3-16                [1, 256, 21, 27]          --
+|    |    └─Conv2d: 3-17                 [1, 128, 21, 27]          295,040
+|    |    └─BatchNorm2d: 3-18            [1, 128, 21, 27]          256
+|    |    └─ReLU: 3-19                   [1, 128, 21, 27]          --
+|    |    └─Dropout: 3-20                [1, 128, 21, 27]          --
+├─unet_up_concat_padding: 1-9            [1, 256, 43, 54]          --
+|    └─Upsample: 2-12                    [1, 128, 42, 54]          --
+├─double_conv: 1-10                      [1, 64, 43, 54]           --
+|    └─Sequential: 2-13                  [1, 64, 43, 54]           --
+|    |    └─Conv2d: 3-21                 [1, 128, 43, 54]          819,328
+|    |    └─BatchNorm2d: 3-22            [1, 128, 43, 54]          256
+|    |    └─ReLU: 3-23                   [1, 128, 43, 54]          --
+|    |    └─Dropout: 3-24                [1, 128, 43, 54]          --
+|    |    └─Conv2d: 3-25                 [1, 64, 43, 54]           204,864
+|    |    └─BatchNorm2d: 3-26            [1, 64, 43, 54]           128
+|    |    └─ReLU: 3-27                   [1, 64, 43, 54]           --
+|    |    └─Dropout: 3-28                [1, 64, 43, 54]           --
+├─unet_up_concat_padding: 1-11           [1, 128, 87, 108]         --
+|    └─Upsample: 2-14                    [1, 64, 86, 108]          --
+├─double_conv: 1-12                      [1, 32, 87, 108]          --
+|    └─Sequential: 2-15                  [1, 32, 87, 108]          --
+|    |    └─Conv2d: 3-29                 [1, 64, 87, 108]          663,616
+|    |    └─BatchNorm2d: 3-30            [1, 64, 87, 108]          128
+|    |    └─ReLU: 3-31                   [1, 64, 87, 108]          --
+|    |    └─Dropout: 3-32                [1, 64, 87, 108]          --
+|    |    └─Conv2d: 3-33                 [1, 32, 87, 108]          165,920
+|    |    └─BatchNorm2d: 3-34            [1, 32, 87, 108]          64
+|    |    └─ReLU: 3-35                   [1, 32, 87, 108]          --
+|    |    └─Dropout: 3-36                [1, 32, 87, 108]          --
+├─unet_up_concat_padding: 1-13           [1, 64, 174, 216]         --
+|    └─Upsample: 2-16                    [1, 32, 174, 216]         --
+├─double_conv: 1-14                      [1, 128, 174, 216]        --
+|    └─Sequential: 2-17                  [1, 128, 174, 216]        --
+|    |    └─Conv2d: 3-37                 [1, 32, 174, 216]         460,832
+|    |    └─BatchNorm2d: 3-38            [1, 32, 174, 216]         64
+|    |    └─ReLU: 3-39                   [1, 32, 174, 216]         --
+|    |    └─Dropout: 3-40                [1, 32, 174, 216]         --
+|    |    └─Conv2d: 3-41                 [1, 128, 174, 216]        921,728
+|    |    └─BatchNorm2d: 3-42            [1, 128, 174, 216]        256
+|    |    └─ReLU: 3-43                   [1, 128, 174, 216]        --
+|    |    └─Dropout: 3-44                [1, 128, 174, 216]        --
+├─Sequential: 1-15                       [1, 180, 174, 72]         --
+|    └─Conv2d: 2-18                      [1, 180, 174, 72]         207,540
+|    └─LeakyReLU: 2-19                   [1, 180, 174, 72]         --
+|    └─MaxPool2d: 2-20                   [1, 180, 174, 72]         --
+|    └─Dropout: 2-21                     [1, 180, 174, 72]         --
+├─Sequential: 1-16                       [1, 150, 100, 72]         --
+|    └─Conv2d: 2-22                      [1, 150, 100, 72]         2,025,150
+|    └─LeakyReLU: 2-23                   [1, 150, 100, 72]         --
+|    └─Dropout: 2-24                     [1, 150, 100, 72]         --
+├─Sequential: 1-17                       [1, 1, 100, 72]           --
+|    └─Conv2d: 2-25                      [1, 100, 100, 72]         15,100
+|    └─LeakyReLU: 2-26                   [1, 100, 100, 72]         --
+|    └─Dropout: 2-27                     [1, 100, 100, 72]         --
+|    └─Conv2d: 2-28                      [1, 1, 100, 72]           101
+|    └─Sigmoid: 2-29                     [1, 1, 100, 72]           --
+├─Sequential: 1-18                       [1, 24, 7, 1]             --
+|    └─Conv2d: 2-30                      [1, 128, 9, 9]            327,808
+|    └─LeakyReLU: 2-31                   [1, 128, 9, 9]            --
+|    └─MaxPool2d: 2-32                   [1, 128, 8, 3]            --
+|    └─Dropout: 2-33                     [1, 128, 8, 3]            --
+|    └─Conv2d: 2-34                      [1, 24, 7, 1]             18,456
+==========================================================================================
+Total params: 14,597,963
+Trainable params: 14,597,963
+Non-trainable params: 0
+Total mult-adds (G): 109.75
+==========================================================================================
+Input size (MB): 0.90
+Forward/backward pass size (MB): 228.60
+Params size (MB): 58.39
+Estimated Total Size (MB): 287.89
+==========================================================================================
+2021-12-19 14:16:52 | INFO :  - file 2530_Beethoven_OP111_PianoSonata.npy added to training set.
+2021-12-19 14:16:54 | INFO :  - file 1822_Mozart_K421_StringQuartet.npy added to training set.
+2021-12-19 14:16:56 | INFO :  - file 1752_Schubert_D845_PianoSonata.npy added to training set.
+2021-12-19 14:16:57 | INFO :  - file 2297_Bach_BWV1010_CelloSuite.npy added to training set.
+2021-12-19 14:16:58 | INFO :  - file 2240_Bach_BWV862_WTKI.npy added to training set.
+2021-12-19 14:16:59 | INFO :  - file 2463_Beethoven_OP23_ViolinSonata.npy added to training set.
+2021-12-19 14:17:00 | INFO :  - file 2550_Beethoven_OP78_PianoSonata.npy added to training set.
+2021-12-19 14:17:02 | INFO :  - file 2566_Beethoven_OP22_PianoSonata.npy added to training set.
+2021-12-19 14:17:04 | INFO :  - file 2492_Beethoven_OP7_PianoSonata.npy added to training set.
+2021-12-19 14:17:05 | INFO :  - file 2359_Beethoven_OP28_PianoSonata.npy added to training set.
+2021-12-19 14:17:07 | INFO :  - file 2138_Brahms_OP51NO1_StringQuartet.npy added to training set.
+2021-12-19 14:17:09 | INFO :  - file 1811_Mozart_K581_ClarinetQuintet.npy added to validation set.
+2021-12-19 14:17:11 | INFO :  - file 2127_Brahms_OP11_SerenadeNo.npy added to training set.
+2021-12-19 14:17:15 | INFO :  - file 2531_Beethoven_OP111_PianoSonata.npy added to training set.
+2021-12-19 14:17:17 | INFO :  - file 2116_Brahms_OP120NO1_ClarinetSonata.npy added to training set.
+2021-12-19 14:17:18 | INFO :  - file 2284_Bach_BWV1014_ViolinSonata.npy added to training set.
+2021-12-19 14:17:19 | INFO :  - file 2379_Beethoven_OP59NO2_StringQuartet.npy added to training set.
+2021-12-19 14:17:20 | INFO :  - file 2237_Bach_BWV868_WTKI.npy added to training set.
+2021-12-19 14:17:22 | INFO :  - file 2313_Beethoven_OP132_StringQuartet.npy added to training set.
+2021-12-19 14:17:23 | INFO :  - file 1755_Schubert_D784_PianoSonata.npy added to validation set.
+2021-12-19 14:17:24 | INFO :  - file 2405_Beethoven_OP110_PianoSonata.npy added to training set.
+2021-12-19 14:17:25 | INFO :  - file 2307_Bach_BWV863_WTKI.npy added to training set.
+2021-12-19 14:17:29 | INFO :  - file 2533_Beethoven_OP111_PianoSonata.npy added to training set.
+2021-12-19 14:17:30 | INFO :  - file 2200_Bach_BWV861_WTKI.npy added to training set.
+2021-12-19 14:17:31 | INFO :  - file 2567_Beethoven_OP90_PianoSonata.npy added to training set.
+2021-12-19 14:17:33 | INFO :  - file 2481_Beethoven_OP18NO5_StringQuartet.npy added to training set.
+2021-12-19 14:17:35 | INFO :  - file 2334_Beethoven_OP30NO3_ViolinSonata.npy added to training set.
+2021-12-19 14:17:35 | INFO :  - file 2208_Bach_BWV855_WTKI.npy added to training set.
+2021-12-19 14:17:37 | INFO :  - file 1766_Schubert_OP142_4Impromptus.npy added to validation set.
+2021-12-19 14:17:39 | INFO :  - file 2169_Faure_OP45_PianoQuartet.npy added to training set.
+2021-12-19 14:17:43 | INFO :  - file 2148_Brahms_OP25_PianoQuartet.npy added to training set.
+2021-12-19 14:17:44 | INFO :  - file 2501_Beethoven_OP12NO3_ViolinSonata.npy added to training set.
+2021-12-19 14:17:47 | INFO :  - file 2614_Beethoven_OP10NO3_PianoSonata.npy added to training set.
+2021-12-19 14:17:50 | INFO :  - file 2557_Beethoven_OP109_PianoSonata.npy added to training set.
+2021-12-19 14:17:51 | INFO :  - file 2373_Beethoven_OP49NO1_PianoSonata.npy added to training set.
+2021-12-19 14:17:54 | INFO :  - file 1733_Schubert_D959_PianoSonata.npy added to validation set.
+2021-12-19 14:17:55 | INFO :  - file 2079_Cambini_JOHN2_WindQuintet.npy added to training set.
+2021-12-19 14:17:56 | INFO :  - file 1835_Mozart_K590_StringQuartet.npy added to training set.
+2021-12-19 14:17:57 | INFO :  - file 1873_Mozart_K502_PianoTrio.npy added to training set.
+2021-12-19 14:17:58 | INFO :  - file 2424_Beethoven_OP2NO1_PianoSonata.npy added to training set.
+2021-12-19 14:17:59 | INFO :  - file 2209_Bach_BWV849_WTKI.npy added to training set.
+2021-12-19 14:18:00 | INFO :  - file 2410_Beethoven_OP27NO1_PianoSonata.npy added to training set.
+2021-12-19 14:18:02 | INFO :  - file 2296_Bach_BWV1010_CelloSuite.npy added to training set.
+2021-12-19 14:18:03 | INFO :  - file 1817_Mozart_K375_Serenadein.npy added to training set.
+2021-12-19 14:18:04 | INFO :  - file 2472_Beethoven_OP2NO3_PianoSonata.npy added to training set.
+2021-12-19 14:18:05 | INFO :  - file 2383_Beethoven_OP130_StringQuartet.npy added to training set.
+2021-12-19 14:18:07 | INFO :  - file 2462_Beethoven_OP23_ViolinSonata.npy added to training set.
+2021-12-19 14:18:09 | INFO :  - file 2575_Beethoven_OP13_PianoSonata.npy added to training set.
+2021-12-19 14:18:10 | INFO :  - file 2320_Beethoven_OP38_Trioin.npy added to training set.
+2021-12-19 14:18:10 | INFO :  - file 2207_Bach_BWV855_WTKI.npy added to training set.
+2021-12-19 14:18:12 | INFO :  - file 2476_Beethoven_OP2NO3_PianoSonata.npy added to training set.
+2021-12-19 14:18:13 | INFO :  - file 2371_Beethoven_OP14NO1_PianoSonata.npy added to training set.
+2021-12-19 14:18:15 | INFO :  - file 2147_Brahms_OP36_StringSextet.npy added to training set.
+2021-12-19 14:18:15 | INFO :  - file 2215_Bach_BWV846_WTKI.npy added to training set.
+2021-12-19 14:18:18 | INFO :  - file 1777_Schubert_D850_PianoSonata.npy added to training set.
+2021-12-19 14:18:19 | INFO :  - file 2502_Beethoven_OP12NO3_ViolinSonata.npy added to training set.
+2021-12-19 14:18:21 | INFO :  - file 1922_Dvorak_OP51_StringQuartet.npy added to training set.
+2021-12-19 14:18:22 | INFO :  - file 1893_Mozart_K564_PianoTrio.npy added to training set.
+2021-12-19 14:18:23 | INFO :  - file 2186_Bach_BWV1006_ViolinPartita.npy added to training set.
+2021-12-19 14:18:25 | INFO :  - file 2160_Brahms_OP40_HornTrio.npy added to training set.
+2021-12-19 14:18:27 | INFO :  - file 2509_Beethoven_OP2NO2_PianoSonata.npy added to training set.
+2021-12-19 14:18:29 | INFO :  - file 2505_Beethoven_OP103_Octetin.npy added to training set.
+2021-12-19 14:18:30 | INFO :  - file 2506_Beethoven_OP103_Octetin.npy added to training set.
+2021-12-19 14:18:31 | INFO :  - file 2628_Beethoven_OP96_ViolinSonata.npy added to training set.
+2021-12-19 14:18:32 | INFO :  - file 2218_Bach_BWV1009_CelloSuite.npy added to training set.
+2021-12-19 14:18:33 | INFO :  - file 2529_Beethoven_OP10NO1_PianoSonata.npy added to training set.
+2021-12-19 14:18:34 | INFO :  - file 2374_Beethoven_OP49NO1_PianoSonata.npy added to training set.
+2021-12-19 14:18:35 | INFO :  - file 2392_Beethoven_OP31NO2_PianoSonata.npy added to training set.
+2021-12-19 14:18:36 | INFO :  - file 2231_Bach_BWV866_WTKI.npy added to training set.
+2021-12-19 14:18:38 | INFO :  - file 1813_Mozart_K581_ClarinetQuintet.npy added to training set.
+2021-12-19 14:18:39 | INFO :  - file 2196_Bach_BWV848_WTKI.npy added to training set.
+2021-12-19 14:18:41 | INFO :  - file 2158_Brahms_OP40_HornTrio.npy added to validation set.
+2021-12-19 14:18:43 | INFO :  - file 1872_Mozart_K502_PianoTrio.npy added to training set.
+2021-12-19 14:18:46 | INFO :  - file 2621_Beethoven_OP59NO1_StringQuartet.npy added to training set.
+2021-12-19 14:18:48 | INFO :  - file 2150_Brahms_OP25_PianoQuartet.npy added to training set.
+2021-12-19 14:18:49 | INFO :  - file 2217_Bach_BWV1009_CelloSuite.npy added to training set.
+2021-12-19 14:18:50 | INFO :  - file 2243_Bach_BWV1001_ViolinSonata.npy added to training set.
+2021-12-19 14:18:52 | INFO :  - file 2433_Beethoven_OP135_StringQuartet.npy added to training set.
+2021-12-19 14:18:53 | INFO :  - file 2211_Bach_BWV857_WTKI.npy added to training set.
+2021-12-19 14:18:55 | INFO :  - file 1764_Schubert_OP142_4Impromptus.npy added to training set.
+2021-12-19 14:18:57 | INFO :  - file 2348_Beethoven_OP27NO2_PianoSonata.npy added to training set.
+2021-12-19 14:18:58 | INFO :  - file 1932_Dvorak_OP96_StringQuartet.npy added to validation set.
+2021-12-19 14:18:58 | INFO :  - file 2232_Bach_BWV866_WTKI.npy added to training set.
+2021-12-19 14:18:59 | INFO :  - file 2203_Bach_BWV1013_Partitain.npy added to training set.
+2021-12-19 14:19:02 | INFO :  - file 2157_Brahms_OP18_StringSextet.npy added to validation set.
+2021-12-19 14:19:04 | INFO :  - file 2486_Beethoven_OP7_PianoSonata.npy added to training set.
+2021-12-19 14:19:05 | INFO :  - file 2393_Beethoven_OP31NO2_PianoSonata.npy added to training set.
+2021-12-19 14:19:06 | INFO :  - file 2210_Bach_BWV849_WTKI.npy added to training set.
+2021-12-19 14:19:07 | INFO :  - file 2659_Bach_BWV1002_ViolinPartita.npy added to training set.
+2021-12-19 14:19:08 | INFO :  - file 1729_Schubert_OP114_PianoQuintet.npy added to validation set.
+2021-12-19 14:19:10 | INFO :  - file 2678_Beethoven_OP14NO2_PianoSonata.npy added to training set.
+2021-12-19 14:19:11 | INFO :  - file 2221_Bach_BWV1009_CelloSuite.npy added to validation set.
+2021-12-19 14:19:12 | INFO :  - file 2411_Beethoven_OP27NO1_PianoSonata.npy added to training set.
+2021-12-19 14:19:13 | INFO :  - file 2343_Beethoven_OP27NO2_PianoSonata.npy added to training set.
+2021-12-19 14:19:15 | INFO :  - file 1818_Mozart_K375_Serenadein.npy added to training set.
+2021-12-19 14:19:17 | INFO :  - file 1919_Dvorak_OP51_StringQuartet.npy added to training set.
+2021-12-19 14:19:18 | INFO :  - file 2415_Beethoven_OP71_Sextetin.npy added to training set.
+2021-12-19 14:19:18 | INFO :  - file 2305_Bach_BWV859_WTKI.npy added to training set.
+2021-12-19 14:19:20 | INFO :  - file 2510_Beethoven_OP2NO2_PianoSonata.npy added to training set.
+2021-12-19 14:19:22 | INFO :  - file 2608_Beethoven_OP31NO1_PianoSonata.npy added to training set.
+2021-12-19 14:19:24 | INFO :  - file 2532_Beethoven_OP111_PianoSonata.npy added to training set.
+2021-12-19 14:19:27 | INFO :  - file 2542_Beethoven_OP101_PianoSonata.npy added to training set.
+2021-12-19 14:19:28 | INFO :  - file 2118_Brahms_OP120NO1_ClarinetSonata.npy added to training set.
+2021-12-19 14:19:30 | INFO :  - file 1756_Schubert_D784_PianoSonata.npy added to validation set.
+2021-12-19 14:19:32 | INFO :  - file 1793_Mozart_K465_StringQuartet.npy added to training set.
+2021-12-19 14:19:34 | INFO :  - file 1758_Schubert_D958_PianoSonata.npy added to training set.
+2021-12-19 14:19:36 | INFO :  - file 2404_Beethoven_OP110_PianoSonata.npy added to training set.
+2021-12-19 14:19:37 | INFO :  - file 2491_Beethoven_OP7_PianoSonata.npy added to training set.
+2021-12-19 14:19:38 | INFO :  - file 2282_Bach_BWV1014_ViolinSonata.npy added to training set.
+2021-12-19 14:19:39 | INFO :  - file 2304_Bach_BWV859_WTKI.npy added to training set.
+2021-12-19 14:19:41 | INFO :  - file 2149_Brahms_OP25_PianoQuartet.npy added to training set.
+2021-12-19 14:19:44 | INFO :  - file 2330_Beethoven_OP12NO1_ViolinSonata.npy added to training set.
+2021-12-19 14:19:46 | INFO :  - file 1916_Dvorak_OP51_StringQuartet.npy added to training set.
+2021-12-19 14:19:47 | INFO :  - file 2212_Bach_BWV857_WTKI.npy added to training set.
+2021-12-19 14:19:49 | INFO :  - file 2480_Beethoven_OP18NO5_StringQuartet.npy added to validation set.
+2021-12-19 14:19:49 | INFO :  - file 2214_Bach_BWV847_WTKI.npy added to training set.
+2021-12-19 14:19:50 | INFO :  - file 2195_Bach_BWV848_WTKI.npy added to training set.
+2021-12-19 14:19:51 | INFO :  - file 2477_Beethoven_OP2NO3_PianoSonata.npy added to training set.
+2021-12-19 14:19:52 | INFO :  - file 2295_Bach_BWV1010_CelloSuite.npy added to training set.
+2021-12-19 14:19:53 | INFO :  - file 1768_Schubert_D664_PianoSonata.npy added to training set.
+2021-12-19 14:19:55 | INFO :  - file 2627_Beethoven_OP96_ViolinSonata.npy added to training set.
+2021-12-19 14:19:56 | INFO :  - file 2431_Beethoven_OP135_StringQuartet.npy added to training set.
+2021-12-19 14:19:57 | INFO :  - file 2591_Beethoven_OP26_PianoSonata.npy added to training set.
+2021-12-19 14:19:59 | INFO :  - file 1775_Schubert_D850_PianoSonata.npy added to training set.
+2021-12-19 14:20:01 | INFO :  - file 2293_Bach_BWV1010_CelloSuite.npy added to training set.
+2021-12-19 14:20:02 | INFO :  - file 1791_Mozart_K465_StringQuartet.npy added to training set.
+2021-12-19 14:20:03 | INFO :  - file 2194_Bach_BWV858_WTKI.npy added to training set.
+2021-12-19 14:20:06 | INFO :  - file 1742_Schubert_OP163_StringQuintet.npy added to training set.
+2021-12-19 14:20:10 | INFO :  - file 1776_Schubert_D850_PianoSonata.npy added to training set.
+2021-12-19 14:20:13 | INFO :  - file 2112_Brahms_OP38_CelloSonata.npy added to training set.
+2021-12-19 14:20:15 | INFO :  - file 2423_Beethoven_OP2NO1_PianoSonata.npy added to training set.
+2021-12-19 14:20:16 | INFO :  - file 2560_Beethoven_OP18NO2_StringQuartet.npy added to training set.
+2021-12-19 14:20:17 | INFO :  - file 2219_Bach_BWV1009_CelloSuite.npy added to training set.
+2021-12-19 14:20:18 | INFO :  - file 2420_Beethoven_OP12NO2_ViolinSonata.npy added to training set.
+2021-12-19 14:20:21 | INFO :  - file 1763_Schubert_OP142_4Impromptus.npy added to training set.
+2021-12-19 14:20:21 | INFO :  - file 2228_Bach_BWV851_WTKI.npy added to training set.
+2021-12-19 14:20:25 | INFO :  - file 2441_Beethoven_OP106_PianoSonata.npy added to training set.
+2021-12-19 14:20:27 | INFO :  - file 2570_Beethoven_OP30NO2_ViolinSonata.npy added to training set.
+2021-12-19 14:20:28 | INFO :  - file 1918_Dvorak_OP51_StringQuartet.npy added to training set.
+2021-12-19 14:20:30 | INFO :  - file 2451_Beethoven_OP18NO6_StringQuartet.npy added to training set.
+2021-12-19 14:20:32 | INFO :  - file 2177_Ravel_35_StringQuartet.npy added to training set.
+2021-12-19 14:20:36 | INFO :  - file 1788_Mozart_K465_StringQuartet.npy added to training set.
+2021-12-19 14:20:42 | INFO :  - file 2179_Ravel_35_StringQuartet.npy added to training set.
+2021-12-19 14:20:44 | INFO :  - file 2346_Beethoven_OP27NO2_PianoSonata.npy added to training set.
+2021-12-19 14:20:47 | INFO :  - file 2376_Beethoven_OP59NO2_StringQuartet.npy added to training set.
+2021-12-19 14:20:48 | INFO :  - file 2620_Beethoven_OP10NO2_PianoSonata.npy added to training set.
+2021-12-19 14:20:50 | INFO :  - file 2390_Beethoven_OP31NO2_PianoSonata.npy added to training set.
+2021-12-19 14:20:52 | INFO :  - file 2335_Beethoven_OP30NO3_ViolinSonata.npy added to training set.
+2021-12-19 14:20:54 | INFO :  - file 2403_Beethoven_OP18NO1_StringQuartet.npy added to training set.
+2021-12-19 14:20:54 | INFO :  - file 2247_Bach_BWV854_WTKI.npy added to training set.
+2021-12-19 14:20:57 | INFO :  - file 2432_Beethoven_OP135_StringQuartet.npy added to training set.
+2021-12-19 14:20:57 | INFO :  - file 2292_Bach_BWV864_WTKI.npy added to training set.
+2021-12-19 14:21:00 | INFO :  - file 2076_Cambini_JOHN1_WindQuintet.npy added to training set.
+2021-12-19 14:21:03 | INFO :  - file 1790_Mozart_K465_StringQuartet.npy added to training set.
+2021-12-19 14:21:04 | INFO :  - file 2302_Bach_BWV850_WTKI.npy added to training set.
+2021-12-19 14:21:06 | INFO :  - file 2391_Beethoven_OP31NO2_PianoSonata.npy added to training set.
+2021-12-19 14:21:07 | INFO :  - file 1933_Dvorak_OP96_StringQuartet.npy added to validation set.
+2021-12-19 14:21:10 | INFO :  - file 2514_Beethoven_OP2NO2_PianoSonata.npy added to training set.
+2021-12-19 14:21:13 | INFO :  - file 1829_Mozart_K542_PianoTrio.npy added to training set.
+2021-12-19 14:21:17 | INFO :  - file 1923_Dvorak_OP51_StringQuartet.npy added to training set.
+2021-12-19 14:21:22 | INFO :  - file 2377_Beethoven_OP59NO2_StringQuartet.npy added to training set.
+2021-12-19 14:21:24 | INFO :  - file 1931_Dvorak_OP96_StringQuartet.npy added to training set.
+2021-12-19 14:21:25 | INFO :  - file 2294_Bach_BWV1010_CelloSuite.npy added to training set.
+2021-12-19 14:21:26 | INFO :  - file 2384_Beethoven_OP130_StringQuartet.npy added to training set.
+2021-12-19 14:21:29 | INFO :  - file 2241_Bach_BWV1001_ViolinSonata.npy added to training set.
+2021-12-19 14:21:31 | INFO :  - file 2242_Bach_BWV1001_ViolinSonata.npy added to training set.
+2021-12-19 14:21:31 | INFO :  - file 2283_Bach_BWV1014_ViolinSonata.npy added to training set.
+2021-12-19 14:21:33 | INFO :  - file 2632_Beethoven_OP14NO2_PianoSonata.npy added to validation set.
+2021-12-19 14:21:36 | INFO :  - file 1760_Schubert_D958_PianoSonata.npy added to training set.
+2021-12-19 14:21:43 | INFO :  - file 2568_Beethoven_OP90_PianoSonata.npy added to training set.
+2021-12-19 14:21:51 | INFO :  - file 2345_Beethoven_OP27NO2_PianoSonata.npy added to training set.
+2021-12-19 14:21:57 | INFO :  - file 2576_Beethoven_OP13_PianoSonata.npy added to training set.
+2021-12-19 14:22:02 | INFO :  - file 2131_Brahms_OP11_SerenadeNo.npy added to training set.
+2021-12-19 14:22:06 | INFO :  - file 2537_Beethoven_OP49NO2_PianoSonata.npy added to training set.
+2021-12-19 14:22:19 | INFO :  - file 2607_Beethoven_OP31NO1_PianoSonata.npy added to training set.
+2021-12-19 14:22:20 | INFO :  - file 2230_Bach_BWV865_WTKI.npy added to training set.
+2021-12-19 14:22:23 | INFO :  - file 2167_Faure_OP45_PianoQuartet.npy added to validation set.
+2021-12-19 14:22:31 | INFO :  - file 2603_Beethoven_OP81NO1_PianoSonata.npy added to training set.
+2021-12-19 14:22:38 | INFO :  - file 2594_Beethoven_OP31NO3_PianoSonata.npy added to training set.
+2021-12-19 14:22:40 | INFO :  - file 2204_Bach_BWV1013_Partitain.npy added to training set.
+2021-12-19 14:22:53 | INFO :  - file 2523_Beethoven_OP69_CelloSonata.npy added to training set.
+2021-12-19 14:23:00 | INFO :  - file 2357_Beethoven_OP28_PianoSonata.npy added to training set.
+2021-12-19 14:23:17 | INFO :  - file 2398_Beethoven_OP47_ViolinSonata.npy added to training set.
+2021-12-19 14:23:17 | INFO :  - file 2310_Bach_BWV860_WTKI.npy added to training set.
+2021-12-19 14:23:22 | INFO :  - file 2078_Cambini_JOHN2_WindQuintet.npy added to training set.
+2021-12-19 14:23:38 | INFO :  - file 2521_Beethoven_OP69_CelloSonata.npy added to training set.
+2021-12-19 14:23:45 | INFO :  - file 2562_Beethoven_OP18NO2_StringQuartet.npy added to training set.
+2021-12-19 14:23:50 | INFO :  - file 1824_Mozart_K421_StringQuartet.npy added to training set.
+2021-12-19 14:24:05 | INFO :  - file 2318_Beethoven_OP38_Trioin.npy added to validation set.
+2021-12-19 14:24:12 | INFO :  - file 1773_Schubert_D568_PianoSonata.npy added to training set.
+2021-12-19 14:24:34 | INFO :  - file 2443_Beethoven_OP106_PianoSonata.npy added to training set.
+2021-12-19 14:24:42 | INFO :  - file 2114_Brahms_OP38_CelloSonata.npy added to training set.
+2021-12-19 14:24:51 | INFO :  - file 2488_Beethoven_OP7_PianoSonata.npy added to training set.
+2021-12-19 14:24:54 | INFO :  - file 2198_Bach_BWV867_WTKI.npy added to training set.
+2021-12-19 14:24:58 | INFO :  - file 2350_Beethoven_OP27NO2_PianoSonata.npy added to training set.
+2021-12-19 14:25:06 | INFO :  - file 2595_Beethoven_OP31NO3_PianoSonata.npy added to training set.
+2021-12-19 14:25:13 | INFO :  - file 1805_Mozart_K387_StringQuartet.npy added to validation set.
+2021-12-19 14:25:20 | INFO :  - file 2113_Brahms_OP38_CelloSonata.npy added to training set.
+2021-12-19 14:25:29 | INFO :  - file 2075_Cambini_JOHN1_WindQuintet.npy added to training set.
+2021-12-19 14:25:37 | INFO :  - file 2516_Beethoven_OP2NO2_PianoSonata.npy added to training set.
+2021-12-19 14:25:43 | INFO :  - file 2497_Beethoven_OP95_StringQuartet.npy added to training set.
+2021-12-19 14:25:46 | INFO :  - file 2507_Beethoven_OP103_Octetin.npy added to training set.
+2021-12-19 14:25:56 | INFO :  - file 2389_Beethoven_OP31NO2_PianoSonata.npy added to training set.
+2021-12-19 14:26:00 | INFO :  - file 2222_Bach_BWV1009_CelloSuite.npy added to validation set.
+2021-12-19 14:26:04 | INFO :  - file 2372_Beethoven_OP14NO1_PianoSonata.npy added to training set.
+2021-12-19 14:26:13 | INFO :  - file 2471_Beethoven_OP2NO3_PianoSonata.npy added to training set.
+2021-12-19 14:26:19 | INFO :  - file 2105_Haydn_OP64NO5_QuartetNo.npy added to training set.
+2021-12-19 14:26:27 | INFO :  - file 2388_Beethoven_OP31NO2_PianoSonata.npy added to training set.
+2021-12-19 14:26:28 | INFO :  - file 2213_Bach_BWV847_WTKI.npy added to training set.
+2021-12-19 14:26:31 | INFO :  - file 2417_Beethoven_OP71_Sextetin.npy added to training set.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ta.npy added to training set.
+2021-12-19 13:56:10 | INFO :  - file 2234_Bach_BWV856_WTKI.npy added to training set.
+2021-12-19 13:56:12 | INFO :  - file 2618_Beethoven_OP10NO2_PianoSonata.npy added to training set.
+2021-12-19 13:56:14 | INFO :  - file 2161_Brahms_OP40_HornTrio.npy added to training set.
+2021-12-19 13:56:17 | INFO :  - file 2166_Faure_OP45_PianoQuartet.npy added to training set.
+2021-12-19 13:56:20 | INFO :  - file 2319_Beethoven_OP38_Trioin.npy added to training set.
+2021-12-19 13:56:22 | INFO :  - file 2590_Beethoven_OP26_PianoSonata.npy added to training set.
+2021-12-19 13:56:22 | INFO : Training set & loader generated, length 94348
+2021-12-19 13:56:22 | INFO : Validation set & loader generated, length 9238
+2021-12-19 13:56:22 | INFO : 
+ 
+ ###################### START TRAINING ###################### 
+
+2021-12-19 14:08:50 | INFO : Epoch #0 finished. Train Loss: 0.1522 (0.0829, 0.0693), Val Loss: 0.1471 (0.0758, 0.0714 with lr: 0.00100
+2021-12-19 14:08:51 | INFO :   .... model of epoch 0 saved.
+2021-12-19 14:21:10 | INFO : Epoch #1 finished. Train Loss: 0.1340 (0.0709, 0.0631), Val Loss: 0.1378 (0.0697, 0.0681 with lr: 0.00100
+2021-12-19 14:21:11 | INFO :   .... model of epoch #1 saved.
+2021-12-19 14:33:29 | INFO : Epoch #2 finished. Train Loss: 0.1275 (0.0670, 0.0605), Val Loss: 0.1363 (0.0695, 0.0668 with lr: 0.00100
+2021-12-19 14:33:30 | INFO :   .... model of epoch #2 saved.
+2021-12-19 14:45:49 | INFO : Epoch #3 finished. Train Loss: 0.1229 (0.0645, 0.0583), Val Loss: 0.1331 (0.0675, 0.0655 with lr: 0.00100
+2021-12-19 14:45:50 | INFO :   .... model of epoch #3 saved.
+2021-12-19 14:58:09 | INFO : Epoch #4 finished. Train Loss: 0.1194 (0.0626, 0.0568), Val Loss: 0.1296 (0.0659, 0.0636 with lr: 0.00100
+2021-12-19 14:58:10 | INFO :   .... model of epoch #4 saved.
+2021-12-19 15:10:33 | INFO : Epoch #5 finished. Train Loss: 0.1167 (0.0612, 0.0555), Val Loss: 0.1308 (0.0671, 0.0637 with lr: 0.00100
+2021-12-19 15:22:53 | INFO : Epoch #6 finished. Train Loss: 0.1151 (0.0606, 0.0545), Val Loss: 0.1301 (0.0671, 0.0630 with lr: 0.00100
+2021-12-19 15:35:13 | INFO : Epoch #7 finished. Train Loss: 0.1123 (0.0591, 0.0531), Val Loss: 0.1298 (0.0674, 0.0624 with lr: 0.00100
+2021-12-19 15:47:33 | INFO : Epoch #8 finished. Train Loss: 0.1139 (0.0604, 0.0535), Val Loss: 0.1289 (0.0666, 0.0623 with lr: 0.00100
+2021-12-19 15:47:34 | INFO :   .... model of epoch #8 saved.
+2021-12-19 15:59:54 | INFO : Epoch #9 finished. Train Loss: 0.1093 (0.0578, 0.0515), Val Loss: 0.1286 (0.0669, 0.0616 with lr: 0.00100
+2021-12-19 15:59:55 | INFO :   .... model of epoch #9 saved.
+2021-12-19 16:12:16 | INFO : Epoch #10 finished. Train Loss: 0.1078 (0.0571, 0.0507), Val Loss: 0.1297 (0.0676, 0.0621 with lr: 0.00100
+2021-12-19 16:24:36 | INFO : Epoch #11 finished. Train Loss: 0.1065 (0.0567, 0.0498), Val Loss: 0.1296 (0.0673, 0.0622 with lr: 0.00100
+2021-12-19 16:36:57 | INFO : Epoch #12 finished. Train Loss: 0.1049 (0.0561, 0.0489), Val Loss: 0.1314 (0.0676, 0.0638 with lr: 0.00100
+2021-12-19 16:49:17 | INFO : Epoch #13 finished. Train Loss: 0.1033 (0.0553, 0.0480), Val Loss: 0.1316 (0.0689, 0.0627 with lr: 0.00100
+2021-12-19 17:01:37 | INFO : Epoch #14 finished. Train Loss: 0.1017 (0.0547, 0.0470), Val Loss: 0.1283 (0.0664, 0.0619 with lr: 0.00100
+2021-12-19 17:01:38 | INFO :   .... model of epoch #14 saved.
+2021-12-19 17:13:58 | INFO : Epoch #15 finished. Train Loss: 0.1004 (0.0543, 0.0460), Val Loss: 0.1289 (0.0658, 0.0631 with lr: 0.00100
+2021-12-19 17:26:18 | INFO : Epoch #16 finished. Train Loss: 0.0987 (0.0537, 0.0450), Val Loss: 0.1280 (0.0665, 0.0615 with lr: 0.00100
+2021-12-19 17:26:19 | INFO :   .... model of epoch #16 saved.
+2021-12-19 17:38:39 | INFO : Epoch #17 finished. Train Loss: 0.0977 (0.0535, 0.0442), Val Loss: 0.1311 (0.0661, 0.0650 with lr: 0.00100
+2021-12-19 17:50:59 | INFO : Epoch #18 finished. Train Loss: 0.0949 (0.0521, 0.0428), Val Loss: 0.1352 (0.0693, 0.0659 with lr: 0.00100
+2021-12-19 18:03:20 | INFO : Epoch #19 finished. Train Loss: 0.0930 (0.0516, 0.0415), Val Loss: 0.1337 (0.0679, 0.0657 with lr: 0.00100
+2021-12-19 18:15:40 | INFO : Epoch #20 finished. Train Loss: 0.0914 (0.0511, 0.0403), Val Loss: 0.1428 (0.0735, 0.0693 with lr: 0.00100
+2021-12-19 18:28:01 | INFO : Epoch #21 finished. Train Loss: 0.0919 (0.0515, 0.0403), Val Loss: 0.1407 (0.0710, 0.0697 with lr: 0.00100
+2021-12-19 18:40:21 | INFO : Epoch #22 finished. Train Loss: 0.0877 (0.0497, 0.0380), Val Loss: 0.1397 (0.0705, 0.0692 with lr: 0.00100
+2021-12-19 18:52:41 | INFO : Epoch #23 finished. Train Loss: 0.0775 (0.0456, 0.0318), Val Loss: 0.1480 (0.0710, 0.0770 with lr: 0.00050
+2021-12-19 19:05:02 | INFO : Epoch #24 finished. Train Loss: 0.0733 (0.0440, 0.0293), Val Loss: 0.1564 (0.0728, 0.0836 with lr: 0.00050
+2021-12-19 19:17:22 | INFO : Epoch #25 finished. Train Loss: 0.0705 (0.0430, 0.0275), Val Loss: 0.1657 (0.0792, 0.0865 with lr: 0.00050
+2021-12-19 19:29:43 | INFO : Epoch #26 finished. Train Loss: 0.0687 (0.0426, 0.0262), Val Loss: 0.1790 (0.0788, 0.1001 with lr: 0.00050
+2021-12-19 19:42:03 | INFO : Epoch #27 finished. Train Loss: 0.0663 (0.0417, 0.0246), Val Loss: 0.1619 (0.0742, 0.0878 with lr: 0.00050
+2021-12-19 19:54:24 | INFO : Epoch #28 finished. Train Loss: 0.0650 (0.0413, 0.0237), Val Loss: 0.1658 (0.0765, 0.0893 with lr: 0.00050
+2021-12-19 19:54:24 | INFO :  ### trained model saved in /tsi/clusterhome/cweiss/models/exp195f_traintest_musicnet_aligned_pitch_unet_extremelylarge_polyphonyclassif_test10files_augall_AdamW_betterratio_softmax_rerun1.pt 
+
+2021-12-19 19:54:24 | INFO : 
+ 
+ ###################### START TESTING ###################### 
+
+2021-12-19 19:54:55 | INFO : file 2106_Haydn_OP64NO5_QuartetNo.npy tested. Cosine sim: 0.7593742799649807
+2021-12-19 19:55:14 | INFO : file 1819_Mozart_K375_Serenadein.npy tested. Cosine sim: 0.7605824505342142
+2021-12-19 19:55:29 | INFO : file 2416_Beethoven_OP71_Sextetin.npy tested. Cosine sim: 0.6924590791108648
+2021-12-19 19:55:41 | INFO : file 2303_Bach_BWV850_WTKI.npy tested. Cosine sim: 0.7949989466237749
+2021-12-19 19:56:02 | INFO : file 1759_Schubert_D958_PianoSonata.npy tested. Cosine sim: 0.7648912536587011
+2021-12-19 19:56:14 | INFO : file 2191_Bach_BWV1006_ViolinPartita.npy tested. Cosine sim: 0.8126952153060278
+2021-12-19 19:57:03 | INFO : file 2629_Beethoven_OP96_ViolinSonata.npy tested. Cosine sim: 0.8060613189770047
+2021-12-19 19:57:16 | INFO : file 2382_Beethoven_OP130_StringQuartet.npy tested. Cosine sim: 0.6070731043802936
+2021-12-19 19:57:31 | INFO : file 2556_Beethoven_OP109_PianoSonata.npy tested. Cosine sim: 0.8114749690331495
+2021-12-19 19:57:46 | INFO : file 2298_Bach_BWV1010_CelloSuite.npy tested. Cosine sim: 0.7796102165618505
+2021-12-19 19:57:46 | INFO : ### Testing done. ################################################ 
+
+2021-12-19 19:57:46 | INFO : #   Results for large test set (10 files) ######################### 
+
+2021-12-19 19:57:46 | INFO : Mean precision:   0.7277246736901418
+2021-12-19 19:57:46 | INFO : Mean recall:   0.7583387428728334
+2021-12-19 19:57:46 | INFO : Mean f_measure:   0.7408609482793362
+2021-12-19 19:57:46 | INFO : Mean cosine_sim:   0.7589220834150862
+2021-12-19 19:57:46 | INFO : Mean binary_crossentropy:   0.06398972403145824
+2021-12-19 19:57:46 | INFO : Mean euclidean_distance:   0.8191827858385633
+2021-12-19 19:57:46 | INFO : Mean binary_accuracy:   0.9825852742012122
+2021-12-19 19:57:46 | INFO : Mean soft_accuracy:   0.9737238735559002
+2021-12-19 19:57:46 | INFO : Mean accum_energy:   0.5531313951250436
+2021-12-19 19:57:46 | INFO : Mean roc_auc_measure:   0.9868072597040918
+2021-12-19 19:57:46 | INFO : Mean average_precision_score:   0.7905581136957825
+2021-12-19 19:57:46 | INFO : Mean Precision:   0.7277246736901418
+2021-12-19 19:57:46 | INFO : Mean Recall:   0.7583387428728334
+2021-12-19 19:57:46 | INFO : Mean Accuracy:   0.5914916264047878
+2021-12-19 19:57:46 | INFO : Mean Substitution Error:   0.1097919758988312
+2021-12-19 19:57:46 | INFO : Mean Miss Error:   0.13186928122833524
+2021-12-19 19:57:46 | INFO : Mean False Alarm Error:   0.18155433650641548
+2021-12-19 19:57:46 | INFO : Mean Total Error:   0.4232155936335819
+2021-12-19 19:57:46 | INFO : Mean Chroma Precision:   0.7461718176642016
+2021-12-19 19:57:46 | INFO : Mean Chroma Recall:   0.7773358590785064
+2021-12-19 19:57:46 | INFO : Mean Chroma Accuracy:   0.6148625888041768
+2021-12-19 19:57:46 | INFO : Mean Chroma Substitution Error:   0.0907948596931583
+2021-12-19 19:57:46 | INFO : Mean Chroma Miss Error:   0.13186928122833524
+2021-12-19 19:57:46 | INFO : Mean Chroma False Alarm Error:   0.18155433650641548
+2021-12-19 19:57:46 | INFO : Mean Chroma Total Error:   0.4042184774279091
+2021-12-19 19:57:46 | INFO : 
+
+2021-12-19 19:57:46 | INFO : Framewise precision:   0.7463150008154493
+2021-12-19 19:57:46 | INFO : Framewise recall:   0.7573234745574114
+2021-12-19 19:57:46 | INFO : Framewise f_measure:   0.7499683539998581
+2021-12-19 19:57:46 | INFO : Framewise cosine_sim:   0.7689625153812308
+2021-12-19 19:57:46 | INFO : Framewise binary_crossentropy:   0.07381241110774148
+2021-12-19 19:57:46 | INFO : Framewise euclidean_distance:   0.8894849366624498
+2021-12-19 19:57:46 | INFO : Framewise binary_accuracy:   0.980589930671688
+2021-12-19 19:57:46 | INFO : Framewise soft_accuracy:   0.9701829734641909
+2021-12-19 19:57:46 | INFO : Framewise accum_energy:   0.5590540162843721
+2021-12-19 19:57:46 | INFO : Framewise roc_auc_measure:   0.9852595791682002
+2021-12-19 19:57:46 | INFO : Framewise average_precision_score:   0.8012222079098774
+2021-12-19 19:57:46 | INFO : Framewise Precision:   0.7463150008154493
+2021-12-19 19:57:46 | INFO : Framewise Recall:   0.7573234745574114
+2021-12-19 19:57:46 | INFO : Framewise Accuracy:   0.6022159942056323
+2021-12-19 19:57:46 | INFO : Framewise Substitution Error:   0.10594570867898549
+2021-12-19 19:57:46 | INFO : Framewise Miss Error:   0.13673081676360344
+2021-12-19 19:57:46 | INFO : Framewise False Alarm Error:   0.15877845482214464
+2021-12-19 19:57:46 | INFO : Framewise Total Error:   0.40145498026473364
+2021-12-19 19:57:46 | INFO : Framewise Chroma Precision:   0.7667401261350999
+2021-12-19 19:57:46 | INFO : Framewise Chroma Recall:   0.77773702796204
+2021-12-19 19:57:46 | INFO : Framewise Chroma Accuracy:   0.6285313886311635
+2021-12-19 19:57:46 | INFO : Framewise Chroma Substitution Error:   0.08553215527435677
+2021-12-19 19:57:46 | INFO : Framewise Chroma Miss Error:   0.13673081676360344
+2021-12-19 19:57:46 | INFO : Framewise Chroma False Alarm Error:   0.15877845482214464
+2021-12-19 19:57:46 | INFO : Framewise Chroma Total Error:   0.38104142686010484
+2021-12-19 19:57:58 | INFO : file 1819_Mozart_K375_Serenadein.npy tested. Cosine sim: 0.7802423414583605
+2021-12-19 19:58:08 | INFO : file 2303_Bach_BWV850_WTKI.npy tested. Cosine sim: 0.8009062496587908
+2021-12-19 19:58:17 | INFO : file 2382_Beethoven_OP130_StringQuartet.npy tested. Cosine sim: 0.6344340711464062
+2021-12-19 19:58:17 | INFO : ### Testing done. ################################################ 
+
+2021-12-19 19:58:17 | INFO : #   Results for small test set (3 files), first 90s ############## 
+
+2021-12-19 19:58:17 | INFO : Mean precision:   0.709448677942048
+2021-12-19 19:58:17 | INFO : Mean recall:   0.7067469225621986
+2021-12-19 19:58:17 | INFO : Mean f_measure:   0.7063144351269898
+2021-12-19 19:58:17 | INFO : Mean cosine_sim:   0.7385275540878524
+2021-12-19 19:58:17 | INFO : Mean binary_crossentropy:   0.0694772931979986
+2021-12-19 19:58:17 | INFO : Mean euclidean_distance:   0.8905256028391856
+2021-12-19 19:58:17 | INFO : Mean binary_accuracy:   0.9801209372637945
+2021-12-19 19:58:17 | INFO : Mean soft_accuracy:   0.9710073590538854
+2021-12-19 19:58:17 | INFO : Mean accum_energy:   0.5292872325158474
+2021-12-19 19:58:17 | INFO : Mean roc_auc_measure:   0.9860295808701617
+2021-12-19 19:58:17 | INFO : Mean average_precision_score:   0.7552001046030243
+2021-12-19 19:58:17 | INFO : Mean Precision:   0.709448677942048
+2021-12-19 19:58:17 | INFO : Mean Recall:   0.7067469225621986
+2021-12-19 19:58:17 | INFO : Mean Accuracy:   0.5504341091213077
+2021-12-19 19:58:17 | INFO : Mean Substitution Error:   0.10335362868352989
+2021-12-19 19:58:17 | INFO : Mean Miss Error:   0.18989944875427145
+2021-12-19 19:58:17 | INFO : Mean False Alarm Error:   0.1999892661448607
+2021-12-19 19:58:17 | INFO : Mean Total Error:   0.4932423435826621
+2021-12-19 19:58:17 | INFO : Mean Chroma Precision:   0.7316874165735179
+2021-12-19 19:58:17 | INFO : Mean Chroma Recall:   0.7301130376940762
+2021-12-19 19:58:17 | INFO : Mean Chroma Accuracy:   0.5772612388266105
+2021-12-19 19:58:17 | INFO : Mean Chroma Substitution Error:   0.07998751355165237
+2021-12-19 19:58:17 | INFO : Mean Chroma Miss Error:   0.18989944875427145
+2021-12-19 19:58:17 | INFO : Mean Chroma False Alarm Error:   0.1999892661448607
+2021-12-19 19:58:17 | INFO : Mean Chroma Total Error:   0.4698762284507845
+2021-12-19 19:58:17 | INFO : 
+
+2021-12-19 19:58:17 | INFO : Framewise precision:   0.7094486779420479
+2021-12-19 19:58:17 | INFO : Framewise recall:   0.7067469225621985
+2021-12-19 19:58:17 | INFO : Framewise f_measure:   0.7063144351269897
+2021-12-19 19:58:17 | INFO : Framewise cosine_sim:   0.7385275540878525
+2021-12-19 19:58:17 | INFO : Framewise binary_crossentropy:   0.0694772931979986
+2021-12-19 19:58:17 | INFO : Framewise euclidean_distance:   0.8905256028391855
+2021-12-19 19:58:17 | INFO : Framewise binary_accuracy:   0.9801209372637943
+2021-12-19 19:58:17 | INFO : Framewise soft_accuracy:   0.9710073590538852
+2021-12-19 19:58:17 | INFO : Framewise accum_energy:   0.5292872325158473
+2021-12-19 19:58:17 | INFO : Framewise roc_auc_measure:   0.9860295808701618
+2021-12-19 19:58:17 | INFO : Framewise average_precision_score:   0.7552001046030243
+2021-12-19 19:58:17 | INFO : Framewise Precision:   0.7094486779420479
+2021-12-19 19:58:17 | INFO : Framewise Recall:   0.7067469225621985
+2021-12-19 19:58:17 | INFO : Framewise Accuracy:   0.5504341091213077
+2021-12-19 19:58:17 | INFO : Framewise Substitution Error:   0.1033536286835299
+2021-12-19 19:58:17 | INFO : Framewise Miss Error:   0.18989944875427148
+2021-12-19 19:58:17 | INFO : Framewise False Alarm Error:   0.19998926614486068
+2021-12-19 19:58:17 | INFO : Framewise Total Error:   0.4932423435826621
+2021-12-19 19:58:17 | INFO : Framewise Chroma Precision:   0.7316874165735178
+2021-12-19 19:58:17 | INFO : Framewise Chroma Recall:   0.7301130376940762
+2021-12-19 19:58:17 | INFO : Framewise Chroma Accuracy:   0.5772612388266105
+2021-12-19 19:58:17 | INFO : Framewise Chroma Substitution Error:   0.07998751355165237
+2021-12-19 19:58:17 | INFO : Framewise Chroma Miss Error:   0.18989944875427148
+2021-12-19 19:58:17 | INFO : Framewise Chroma False Alarm Error:   0.19998926614486068
+2021-12-19 19:58:17 | INFO : Framewise Chroma Total Error:   0.4698762284507846
+2021-12-19 19:58:34 | INFO : file 1819_Mozart_K375_Serenadein.npy tested. Cosine sim: 0.7605824505342142
+2021-12-19 19:58:43 | INFO : file 2303_Bach_BWV850_WTKI.npy tested. Cosine sim: 0.7949989466237749
+2021-12-19 19:58:55 | INFO : file 2382_Beethoven_OP130_StringQuartet.npy tested. Cosine sim: 0.6070731043802936
+2021-12-19 19:58:55 | INFO : ### Testing done. ################################################ 
+
+2021-12-19 19:58:55 | INFO : #   Results for small test set (3 files), full ################### 
+
+2021-12-19 19:58:55 | INFO : Mean precision:   0.6916477688680652
+2021-12-19 19:58:55 | INFO : Mean recall:   0.6950776782010927
+2021-12-19 19:58:55 | INFO : Mean f_measure:   0.6925233552970963
+2021-12-19 19:58:55 | INFO : Mean cosine_sim:   0.7208848338460943
+2021-12-19 19:58:55 | INFO : Mean binary_crossentropy:   0.07287749920121922
+2021-12-19 19:58:55 | INFO : Mean euclidean_distance:   0.9009097221185871
+2021-12-19 19:58:55 | INFO : Mean binary_accuracy:   0.9792295252384159
+2021-12-19 19:58:55 | INFO : Mean soft_accuracy:   0.9703888018361635
+2021-12-19 19:58:55 | INFO : Mean accum_energy:   0.5092815726721839
+2021-12-19 19:58:55 | INFO : Mean roc_auc_measure:   0.983544383842745
+2021-12-19 19:58:55 | INFO : Mean average_precision_score:   0.7338776792177649
+2021-12-19 19:58:55 | INFO : Mean Precision:   0.6916477688680652
+2021-12-19 19:58:55 | INFO : Mean Recall:   0.6950776782010927
+2021-12-19 19:58:55 | INFO : Mean Accuracy:   0.5343235437250787
+2021-12-19 19:58:55 | INFO : Mean Substitution Error:   0.11723538250334604
+2021-12-19 19:58:55 | INFO : Mean Miss Error:   0.18768693929556127
+2021-12-19 19:58:55 | INFO : Mean False Alarm Error:   0.2008563561913582
+2021-12-19 19:58:55 | INFO : Mean Total Error:   0.5057786779902655
+2021-12-19 19:58:55 | INFO : Mean Chroma Precision:   0.7179189342502786
+2021-12-19 19:58:55 | INFO : Mean Chroma Recall:   0.7222873759981909
+2021-12-19 19:58:55 | INFO : Mean Chroma Accuracy:   0.56537116389031
+2021-12-19 19:58:55 | INFO : Mean Chroma Substitution Error:   0.09002568470624782
+2021-12-19 19:58:55 | INFO : Mean Chroma Miss Error:   0.18768693929556127
+2021-12-19 19:58:55 | INFO : Mean Chroma False Alarm Error:   0.2008563561913582
+2021-12-19 19:58:55 | INFO : Mean Chroma Total Error:   0.47856898019316735
+2021-12-19 19:58:55 | INFO : 
+
+2021-12-19 19:58:55 | INFO : Framewise precision:   0.7025687784346285
+2021-12-19 19:58:55 | INFO : Framewise recall:   0.6947099372102814
+2021-12-19 19:58:55 | INFO : Framewise f_measure:   0.6976873067747352
+2021-12-19 19:58:55 | INFO : Framewise cosine_sim:   0.7221318755948838
+2021-12-19 19:58:55 | INFO : Framewise binary_crossentropy:   0.0741119232332227
+2021-12-19 19:58:55 | INFO : Framewise euclidean_distance:   0.9117484164006993
+2021-12-19 19:58:55 | INFO : Framewise binary_accuracy:   0.9789901165147922
+2021-12-19 19:58:55 | INFO : Framewise soft_accuracy:   0.969776983273681
+2021-12-19 19:58:55 | INFO : Framewise accum_energy:   0.499726738620384
+2021-12-19 19:58:55 | INFO : Framewise roc_auc_measure:   0.9838919815232873
+2021-12-19 19:58:55 | INFO : Framewise average_precision_score:   0.7420946047260332
+2021-12-19 19:58:55 | INFO : Framewise Precision:   0.7025687784346285
+2021-12-19 19:58:55 | INFO : Framewise Recall:   0.6947099372102814
+2021-12-19 19:58:55 | INFO : Framewise Accuracy:   0.5402355120145452
+2021-12-19 19:58:55 | INFO : Framewise Substitution Error:   0.11224087376303958
+2021-12-19 19:58:55 | INFO : Framewise Miss Error:   0.1930491890266791
+2021-12-19 19:58:55 | INFO : Framewise False Alarm Error:   0.19083973480861158
+2021-12-19 19:58:55 | INFO : Framewise Total Error:   0.49612979759833026
+2021-12-19 19:58:55 | INFO : Framewise Chroma Precision:   0.7274320054240737
+2021-12-19 19:58:55 | INFO : Framewise Chroma Recall:   0.7201806973799855
+2021-12-19 19:58:55 | INFO : Framewise Chroma Accuracy:   0.5695548712777461
+2021-12-19 19:58:55 | INFO : Framewise Chroma Substitution Error:   0.08677011359333547
+2021-12-19 19:58:55 | INFO : Framewise Chroma Miss Error:   0.1930491890266791
+2021-12-19 19:58:55 | INFO : Framewise Chroma False Alarm Error:   0.19083973480861158
+2021-12-19 19:58:55 | INFO : Framewise Chroma Total Error:   0.47065903742862614

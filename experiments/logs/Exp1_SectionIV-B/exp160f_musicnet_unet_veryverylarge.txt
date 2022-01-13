@@ -1,0 +1,251 @@
+2021-12-01 21:14:45 | INFO : Logging experiment exp160f_traintest_musicnet_aligned_pitch_unet_veryverylarge_test10files_augall_AdamW
+2021-12-01 21:14:45 | INFO : Experiment config: do training = True
+2021-12-01 21:14:45 | INFO : Experiment config: do validation = True
+2021-12-01 21:14:45 | INFO : Experiment config: do testing = True
+2021-12-01 21:14:45 | INFO : Training set parameters: {'context': 75, 'stride': 50, 'compression': 10, 'aug:transpsemitones': 5, 'aug:randomeq': 20, 'aug:noisestd': 0.0001, 'aug:tuning': True}
+2021-12-01 21:14:45 | INFO : Validation set parameters: {'context': 75, 'stride': 50, 'compression': 10}
+2021-12-01 21:14:45 | INFO : Test set parameters: {'context': 75, 'stride': 1, 'compression': 10}
+2021-12-01 21:14:45 | INFO : Training parameters: {'batch_size': 25, 'shuffle': True, 'num_workers': 16}
+2021-12-01 21:14:45 | INFO : Trained model saved in /tsi/clusterhome/cweiss/models/exp160f_traintest_musicnet_aligned_pitch_unet_veryverylarge_test10files_augall_AdamW.pt
+2021-12-01 21:14:45 | INFO :  --- Training config: ----------------------------------------- 
+2021-12-01 21:14:45 | INFO : Maximum number of epochs: 100
+2021-12-01 21:14:45 | INFO : Criterion (Loss): BCELoss
+2021-12-01 21:14:45 | INFO : Optimizer parameters: {'name': 'AdamW', 'initial_lr': 0.001, 'betas': (0.9, 0.999), 'eps': 1e-08, 'weight_decay': 0.01, 'amsgrad': False}
+2021-12-01 21:14:45 | INFO : Scheduler parameters: {'use_scheduler': True, 'name': 'ReduceLROnPlateau', 'mode': 'min', 'factor': 0.5, 'patience': 5, 'threshold': 0.0001, 'threshold_mode': 'rel', 'cooldown': 0, 'min_lr': 1e-06, 'eps': 1e-08, 'verbose': False}
+2021-12-01 21:14:45 | INFO : Early stopping parameters: {'use_early_stopping': True, 'mode': 'min', 'min_delta': 1e-05, 'patience': 12, 'percentage': False}
+2021-12-01 21:14:45 | INFO : Test parameters: {'batch_size': 50, 'shuffle': False, 'num_workers': 8}
+2021-12-01 21:14:45 | INFO : Save filewise results = True, in folder /tsi/clusterhome/cweiss/code/deep_pitch_estimation/experiments/results_filewise/exp160f_traintest_musicnet_aligned_pitch_unet_veryverylarge_test10files_augall_AdamW.csv
+2021-12-01 21:14:45 | INFO : Save model predictions = True, in folder /tsi/clusterhome/cweiss/predictions/exp160f_traintest_musicnet_aligned_pitch_unet_veryverylarge_test10files_augall_AdamW
+2021-12-01 20:55:25 | INFO : 
+ 
+ ###################### START TRAINING ###################### 
+
+2021-12-01 21:14:54 | INFO : Epoch #0 finished. Train Loss: 0.0821, Val Loss: 0.0768 with lr: 0.00100
+2021-12-01 21:14:55 | INFO :   .... model of epoch 0 saved.
+2021-12-01 21:34:07 | INFO : Epoch #1 finished. Train Loss: 0.0693, Val Loss: 0.0725 with lr: 0.00100
+2021-12-01 21:34:08 | INFO :   .... model of epoch #1 saved.
+2021-12-01 21:53:20 | INFO : Epoch #2 finished. Train Loss: 0.0680, Val Loss: 0.0717 with lr: 0.00100
+2021-12-01 21:53:20 | INFO :   .... model of epoch #2 saved.
+2021-12-01 22:12:32 | INFO : Epoch #3 finished. Train Loss: 0.0644, Val Loss: 0.0704 with lr: 0.00100
+2021-12-01 22:12:33 | INFO :   .... model of epoch #3 saved.
+2021-12-01 22:31:44 | INFO : Epoch #4 finished. Train Loss: 0.0652, Val Loss: 0.0703 with lr: 0.00100
+2021-12-01 22:31:44 | INFO :   .... model of epoch #4 saved.
+2021-12-01 22:50:56 | INFO : Epoch #5 finished. Train Loss: 0.0623, Val Loss: 0.0698 with lr: 0.00100
+2021-12-01 22:50:57 | INFO :   .... model of epoch #5 saved.
+2021-12-01 23:10:08 | INFO : Epoch #6 finished. Train Loss: 0.0613, Val Loss: 0.0688 with lr: 0.00100
+2021-12-01 23:10:09 | INFO :   .... model of epoch #6 saved.
+2021-12-01 23:29:20 | INFO : Epoch #7 finished. Train Loss: 0.0596, Val Loss: 0.0692 with lr: 0.00100
+2021-12-01 23:48:32 | INFO : Epoch #8 finished. Train Loss: 0.0591, Val Loss: 0.0679 with lr: 0.00100
+2021-12-01 23:48:33 | INFO :   .... model of epoch #8 saved.
+2021-12-02 00:07:44 | INFO : Epoch #9 finished. Train Loss: 0.0641, Val Loss: 0.0702 with lr: 0.00100
+2021-12-02 00:26:55 | INFO : Epoch #10 finished. Train Loss: 0.0619, Val Loss: 0.0677 with lr: 0.00100
+2021-12-02 00:26:56 | INFO :   .... model of epoch #10 saved.
+2021-12-02 00:46:08 | INFO : Epoch #11 finished. Train Loss: 0.0579, Val Loss: 0.0678 with lr: 0.00100
+2021-12-02 01:05:19 | INFO : Epoch #12 finished. Train Loss: 0.0570, Val Loss: 0.0721 with lr: 0.00100
+2021-12-02 01:24:31 | INFO : Epoch #13 finished. Train Loss: 0.0586, Val Loss: 0.0696 with lr: 0.00100
+2021-12-02 01:43:43 | INFO : Epoch #14 finished. Train Loss: 0.0569, Val Loss: 0.0672 with lr: 0.00100
+2021-12-02 01:43:44 | INFO :   .... model of epoch #14 saved.
+2021-12-02 02:02:56 | INFO : Epoch #15 finished. Train Loss: 0.0553, Val Loss: 0.0672 with lr: 0.00100
+2021-12-02 02:02:57 | INFO :   .... model of epoch #15 saved.
+2021-12-02 02:22:09 | INFO : Epoch #16 finished. Train Loss: 0.0550, Val Loss: 0.0710 with lr: 0.00100
+2021-12-02 02:41:21 | INFO : Epoch #17 finished. Train Loss: 0.0541, Val Loss: 0.0686 with lr: 0.00100
+2021-12-02 03:00:33 | INFO : Epoch #18 finished. Train Loss: 0.0536, Val Loss: 0.0685 with lr: 0.00100
+2021-12-02 03:19:44 | INFO : Epoch #19 finished. Train Loss: 0.0525, Val Loss: 0.0681 with lr: 0.00100
+2021-12-02 03:38:56 | INFO : Epoch #20 finished. Train Loss: 0.0527, Val Loss: 0.0697 with lr: 0.00100
+2021-12-02 03:58:07 | INFO : Epoch #21 finished. Train Loss: 0.0524, Val Loss: 0.0696 with lr: 0.00100
+2021-12-02 04:17:19 | INFO : Epoch #22 finished. Train Loss: 0.0481, Val Loss: 0.0685 with lr: 0.00050
+2021-12-02 04:36:31 | INFO : Epoch #23 finished. Train Loss: 0.0471, Val Loss: 0.0696 with lr: 0.00050
+2021-12-02 04:55:43 | INFO : Epoch #24 finished. Train Loss: 0.0462, Val Loss: 0.0687 with lr: 0.00050
+2021-12-02 05:14:56 | INFO : Epoch #25 finished. Train Loss: 0.0456, Val Loss: 0.0703 with lr: 0.00050
+2021-12-02 05:34:08 | INFO : Epoch #26 finished. Train Loss: 0.0450, Val Loss: 0.0721 with lr: 0.00050
+2021-12-02 05:53:20 | INFO : Epoch #27 finished. Train Loss: 0.0445, Val Loss: 0.0705 with lr: 0.00050
+2021-12-02 05:53:20 | INFO :  ### trained model saved in /tsi/clusterhome/cweiss/models/exp160f_traintest_musicnet_aligned_pitch_unet_veryverylarge_test10files_augall_AdamW.pt 
+
+2021-12-02 05:53:20 | INFO : 
+ 
+ ###################### START TESTING ###################### 
+
+2021-12-02 05:53:58 | INFO : file 2106_Haydn_OP64NO5_QuartetNo.npy tested. Cosine sim: 0.761374908067803
+2021-12-02 05:54:26 | INFO : file 1819_Mozart_K375_Serenadein.npy tested. Cosine sim: 0.7681178485560861
+2021-12-02 05:54:49 | INFO : file 2416_Beethoven_OP71_Sextetin.npy tested. Cosine sim: 0.6869153820185869
+2021-12-02 05:55:05 | INFO : file 2303_Bach_BWV850_WTKI.npy tested. Cosine sim: 0.8012534184237226
+2021-12-02 05:55:35 | INFO : file 1759_Schubert_D958_PianoSonata.npy tested. Cosine sim: 0.7720114857981569
+2021-12-02 05:55:52 | INFO : file 2191_Bach_BWV1006_ViolinPartita.npy tested. Cosine sim: 0.8477822297997628
+2021-12-02 05:57:04 | INFO : file 2629_Beethoven_OP96_ViolinSonata.npy tested. Cosine sim: 0.8047166392610815
+2021-12-02 05:57:23 | INFO : file 2382_Beethoven_OP130_StringQuartet.npy tested. Cosine sim: 0.6195368771488109
+2021-12-02 05:57:44 | INFO : file 2556_Beethoven_OP109_PianoSonata.npy tested. Cosine sim: 0.8139482157184252
+2021-12-02 05:58:06 | INFO : file 2298_Bach_BWV1010_CelloSuite.npy tested. Cosine sim: 0.7460470343428083
+2021-12-02 05:58:06 | INFO : ### Testing done. ################################################ 
+
+2021-12-02 05:58:06 | INFO : #   Results for large test set (10 files) ######################### 
+
+2021-12-02 05:58:06 | INFO : Mean precision:   0.719309963926187
+2021-12-02 05:58:06 | INFO : Mean recall:   0.7785365691619943
+2021-12-02 05:58:06 | INFO : Mean f_measure:   0.7459803068888746
+2021-12-02 05:58:06 | INFO : Mean cosine_sim:   0.7621704039135244
+2021-12-02 05:58:06 | INFO : Mean binary_crossentropy:   0.06438259874457747
+2021-12-02 05:58:06 | INFO : Mean euclidean_distance:   0.8355650786579096
+2021-12-02 05:58:06 | INFO : Mean binary_accuracy:   0.9826076631762557
+2021-12-02 05:58:06 | INFO : Mean soft_accuracy:   0.9719966145189195
+2021-12-02 05:58:06 | INFO : Mean accum_energy:   0.5477150998041107
+2021-12-02 05:58:06 | INFO : Mean roc_auc_measure:   0.9869811755451134
+2021-12-02 05:58:06 | INFO : Mean average_precision_score:   0.791068597076553
+2021-12-02 05:58:06 | INFO : Mean Precision:   0.719309963926187
+2021-12-02 05:58:06 | INFO : Mean Recall:   0.7785365691619943
+2021-12-02 05:58:06 | INFO : Mean Accuracy:   0.5984862680158787
+2021-12-02 05:58:06 | INFO : Mean Substitution Error:   0.10879251883686866
+2021-12-02 05:58:06 | INFO : Mean Miss Error:   0.1126709120011371
+2021-12-02 05:58:06 | INFO : Mean False Alarm Error:   0.20431954464360835
+2021-12-02 05:58:06 | INFO : Mean Total Error:   0.4257829754816142
+2021-12-02 05:58:06 | INFO : Mean Chroma Precision:   0.736741690811284
+2021-12-02 05:58:06 | INFO : Mean Chroma Recall:   0.797290463959782
+2021-12-02 05:58:06 | INFO : Mean Chroma Accuracy:   0.6212433011072804
+2021-12-02 05:58:06 | INFO : Mean Chroma Substitution Error:   0.090038624039081
+2021-12-02 05:58:06 | INFO : Mean Chroma Miss Error:   0.1126709120011371
+2021-12-02 05:58:06 | INFO : Mean Chroma False Alarm Error:   0.20431954464360835
+2021-12-02 05:58:06 | INFO : Mean Chroma Total Error:   0.40702908068382654
+2021-12-02 05:58:06 | INFO : 
+
+2021-12-02 05:58:06 | INFO : Framewise precision:   0.7361866746925944
+2021-12-02 05:58:06 | INFO : Framewise recall:   0.775435317432492
+2021-12-02 05:58:06 | INFO : Framewise f_measure:   0.7533574158423967
+2021-12-02 05:58:06 | INFO : Framewise cosine_sim:   0.7703445106064007
+2021-12-02 05:58:06 | INFO : Framewise binary_crossentropy:   0.07427467353446993
+2021-12-02 05:58:06 | INFO : Framewise euclidean_distance:   0.9049888992690053
+2021-12-02 05:58:06 | INFO : Framewise binary_accuracy:   0.9805314344780697
+2021-12-02 05:58:06 | INFO : Framewise soft_accuracy:   0.9685183148077309
+2021-12-02 05:58:06 | INFO : Framewise accum_energy:   0.5561585217409026
+2021-12-02 05:58:06 | INFO : Framewise roc_auc_measure:   0.9853619413721916
+2021-12-02 05:58:06 | INFO : Framewise average_precision_score:   0.7992735855019596
+2021-12-02 05:58:06 | INFO : Framewise Precision:   0.7361866746925944
+2021-12-02 05:58:06 | INFO : Framewise Recall:   0.775435317432492
+2021-12-02 05:58:06 | INFO : Framewise Accuracy:   0.6068262031773675
+2021-12-02 05:58:06 | INFO : Framewise Substitution Error:   0.10792007685807019
+2021-12-02 05:58:06 | INFO : Framewise Miss Error:   0.11664460570943808
+2021-12-02 05:58:06 | INFO : Framewise False Alarm Error:   0.17929309906943036
+2021-12-02 05:58:06 | INFO : Framewise Total Error:   0.40385778163693864
+2021-12-02 05:58:06 | INFO : Framewise Chroma Precision:   0.7565739493441431
+2021-12-02 05:58:06 | INFO : Framewise Chroma Recall:   0.7965845140646928
+2021-12-02 05:58:06 | INFO : Framewise Chroma Accuracy:   0.633804504999566
+2021-12-02 05:58:06 | INFO : Framewise Chroma Substitution Error:   0.08677088022586936
+2021-12-02 05:58:06 | INFO : Framewise Chroma Miss Error:   0.11664460570943808
+2021-12-02 05:58:06 | INFO : Framewise Chroma False Alarm Error:   0.17929309906943036
+2021-12-02 05:58:06 | INFO : Framewise Chroma Total Error:   0.38270858500473787
+2021-12-02 05:58:23 | INFO : file 1819_Mozart_K375_Serenadein.npy tested. Cosine sim: 0.7829133798690211
+2021-12-02 05:58:36 | INFO : file 2303_Bach_BWV850_WTKI.npy tested. Cosine sim: 0.8061803944766784
+2021-12-02 05:58:49 | INFO : file 2382_Beethoven_OP130_StringQuartet.npy tested. Cosine sim: 0.6342717223397216
+2021-12-02 05:58:49 | INFO : ### Testing done. ################################################ 
+
+2021-12-02 05:58:49 | INFO : #   Results for small test set (3 files), first 90s ############## 
+
+2021-12-02 05:58:49 | INFO : Mean precision:   0.7033774301643044
+2021-12-02 05:58:49 | INFO : Mean recall:   0.7501188384623695
+2021-12-02 05:58:49 | INFO : Mean f_measure:   0.7257812790974417
+2021-12-02 05:58:49 | INFO : Mean cosine_sim:   0.7411218322284737
+2021-12-02 05:58:49 | INFO : Mean binary_crossentropy:   0.0683550430570924
+2021-12-02 05:58:49 | INFO : Mean euclidean_distance:   0.8943089923370197
+2021-12-02 05:58:49 | INFO : Mean binary_accuracy:   0.9809464758125473
+2021-12-02 05:58:49 | INFO : Mean soft_accuracy:   0.9692632481087298
+2021-12-02 05:58:49 | INFO : Mean accum_energy:   0.5386484093851042
+2021-12-02 05:58:49 | INFO : Mean roc_auc_measure:   0.9863491262881902
+2021-12-02 05:58:49 | INFO : Mean average_precision_score:   0.7738369081632039
+2021-12-02 05:58:49 | INFO : Mean Precision:   0.7033774301643044
+2021-12-02 05:58:49 | INFO : Mean Recall:   0.7501188384623695
+2021-12-02 05:58:49 | INFO : Mean Accuracy:   0.5758421089607771
+2021-12-02 05:58:49 | INFO : Mean Substitution Error:   0.09952153425567704
+2021-12-02 05:58:49 | INFO : Mean Miss Error:   0.15035962728195337
+2021-12-02 05:58:49 | INFO : Mean False Alarm Error:   0.22152735000347487
+2021-12-02 05:58:49 | INFO : Mean Total Error:   0.47140851154110525
+2021-12-02 05:58:49 | INFO : Mean Chroma Precision:   0.7209786814190533
+2021-12-02 05:58:49 | INFO : Mean Chroma Recall:   0.7693689813113181
+2021-12-02 05:58:49 | INFO : Mean Chroma Accuracy:   0.5974062432576317
+2021-12-02 05:58:49 | INFO : Mean Chroma Substitution Error:   0.08027139140672847
+2021-12-02 05:58:49 | INFO : Mean Chroma Miss Error:   0.15035962728195337
+2021-12-02 05:58:49 | INFO : Mean Chroma False Alarm Error:   0.22152735000347487
+2021-12-02 05:58:49 | INFO : Mean Chroma Total Error:   0.45215836869215664
+2021-12-02 05:58:49 | INFO : 
+
+2021-12-02 05:58:49 | INFO : Framewise precision:   0.7033774301643044
+2021-12-02 05:58:49 | INFO : Framewise recall:   0.7501188384623696
+2021-12-02 05:58:49 | INFO : Framewise f_measure:   0.7257812790974418
+2021-12-02 05:58:49 | INFO : Framewise cosine_sim:   0.7411218322284737
+2021-12-02 05:58:49 | INFO : Framewise binary_crossentropy:   0.0683550430570924
+2021-12-02 05:58:49 | INFO : Framewise euclidean_distance:   0.8943089923370198
+2021-12-02 05:58:49 | INFO : Framewise binary_accuracy:   0.9809464758125472
+2021-12-02 05:58:49 | INFO : Framewise soft_accuracy:   0.9692632481087298
+2021-12-02 05:58:49 | INFO : Framewise accum_energy:   0.5386484093851042
+2021-12-02 05:58:49 | INFO : Framewise roc_auc_measure:   0.98634912628819
+2021-12-02 05:58:49 | INFO : Framewise average_precision_score:   0.7738369081632039
+2021-12-02 05:58:49 | INFO : Framewise Precision:   0.7033774301643044
+2021-12-02 05:58:49 | INFO : Framewise Recall:   0.7501188384623696
+2021-12-02 05:58:49 | INFO : Framewise Accuracy:   0.5758421089607771
+2021-12-02 05:58:49 | INFO : Framewise Substitution Error:   0.09952153425567703
+2021-12-02 05:58:49 | INFO : Framewise Miss Error:   0.15035962728195335
+2021-12-02 05:58:49 | INFO : Framewise False Alarm Error:   0.2215273500034749
+2021-12-02 05:58:49 | INFO : Framewise Total Error:   0.4714085115411053
+2021-12-02 05:58:49 | INFO : Framewise Chroma Precision:   0.7209786814190533
+2021-12-02 05:58:49 | INFO : Framewise Chroma Recall:   0.7693689813113183
+2021-12-02 05:58:49 | INFO : Framewise Chroma Accuracy:   0.5974062432576318
+2021-12-02 05:58:49 | INFO : Framewise Chroma Substitution Error:   0.08027139140672847
+2021-12-02 05:58:49 | INFO : Framewise Chroma Miss Error:   0.15035962728195335
+2021-12-02 05:58:49 | INFO : Framewise Chroma False Alarm Error:   0.2215273500034749
+2021-12-02 05:58:49 | INFO : Framewise Chroma Total Error:   0.4521583686921567
+2021-12-02 05:59:14 | INFO : file 1819_Mozart_K375_Serenadein.npy tested. Cosine sim: 0.7681178485560861
+2021-12-02 05:59:27 | INFO : file 2303_Bach_BWV850_WTKI.npy tested. Cosine sim: 0.8012534184237226
+2021-12-02 05:59:44 | INFO : file 2382_Beethoven_OP130_StringQuartet.npy tested. Cosine sim: 0.6195368771488109
+2021-12-02 05:59:44 | INFO : ### Testing done. ################################################ 
+
+2021-12-02 05:59:44 | INFO : #   Results for small test set (3 files), full ################### 
+
+2021-12-02 05:59:44 | INFO : Mean precision:   0.6905562889252814
+2021-12-02 05:59:44 | INFO : Mean recall:   0.735660999319146
+2021-12-02 05:59:44 | INFO : Mean f_measure:   0.7122625198514516
+2021-12-02 05:59:44 | INFO : Mean cosine_sim:   0.7296360480428733
+2021-12-02 05:59:44 | INFO : Mean binary_crossentropy:   0.07121008111238049
+2021-12-02 05:59:44 | INFO : Mean euclidean_distance:   0.8998477880522865
+2021-12-02 05:59:44 | INFO : Mean binary_accuracy:   0.9800181672440793
+2021-12-02 05:59:44 | INFO : Mean soft_accuracy:   0.9689443562439518
+2021-12-02 05:59:44 | INFO : Mean accum_energy:   0.5170936167755978
+2021-12-02 05:59:44 | INFO : Mean roc_auc_measure:   0.9844185226384671
+2021-12-02 05:59:44 | INFO : Mean average_precision_score:   0.7531395570120792
+2021-12-02 05:59:44 | INFO : Mean Precision:   0.6905562889252814
+2021-12-02 05:59:44 | INFO : Mean Recall:   0.735660999319146
+2021-12-02 05:59:44 | INFO : Mean Accuracy:   0.5595458719899898
+2021-12-02 05:59:44 | INFO : Mean Substitution Error:   0.11393402577791108
+2021-12-02 05:59:44 | INFO : Mean Miss Error:   0.1504049749029429
+2021-12-02 05:59:44 | INFO : Mean False Alarm Error:   0.2193744770582137
+2021-12-02 05:59:44 | INFO : Mean Total Error:   0.4837134777390677
+2021-12-02 05:59:44 | INFO : Mean Chroma Precision:   0.7119789334695498
+2021-12-02 05:59:44 | INFO : Mean Chroma Recall:   0.7588825906012951
+2021-12-02 05:59:44 | INFO : Mean Chroma Accuracy:   0.5855637301655109
+2021-12-02 05:59:44 | INFO : Mean Chroma Substitution Error:   0.09071243449576195
+2021-12-02 05:59:44 | INFO : Mean Chroma Miss Error:   0.1504049749029429
+2021-12-02 05:59:44 | INFO : Mean Chroma False Alarm Error:   0.2193744770582137
+2021-12-02 05:59:44 | INFO : Mean Chroma Total Error:   0.4604918864569186
+2021-12-02 05:59:44 | INFO : 
+
+2021-12-02 05:59:44 | INFO : Framewise precision:   0.6920416642169878
+2021-12-02 05:59:44 | INFO : Framewise recall:   0.7392771407152824
+2021-12-02 05:59:44 | INFO : Framewise f_measure:   0.7147723469472824
+2021-12-02 05:59:44 | INFO : Framewise cosine_sim:   0.7308597019179313
+2021-12-02 05:59:44 | INFO : Framewise binary_crossentropy:   0.07280672929229616
+2021-12-02 05:59:44 | INFO : Framewise euclidean_distance:   0.9146477817683731
+2021-12-02 05:59:44 | INFO : Framewise binary_accuracy:   0.9794420849035913
+2021-12-02 05:59:44 | INFO : Framewise soft_accuracy:   0.9680377847912399
+2021-12-02 05:59:44 | INFO : Framewise accum_energy:   0.514714026774997
+2021-12-02 05:59:44 | INFO : Framewise roc_auc_measure:   0.9847348175358819
+2021-12-02 05:59:44 | INFO : Framewise average_precision_score:   0.7557836142445957
+2021-12-02 05:59:44 | INFO : Framewise Precision:   0.6920416642169878
+2021-12-02 05:59:44 | INFO : Framewise Recall:   0.7392771407152824
+2021-12-02 05:59:44 | INFO : Framewise Accuracy:   0.562001767994541
+2021-12-02 05:59:44 | INFO : Framewise Substitution Error:   0.1144266671022402
+2021-12-02 05:59:44 | INFO : Framewise Miss Error:   0.14629619218247755
+2021-12-02 05:59:44 | INFO : Framewise False Alarm Error:   0.21760473788404242
+2021-12-02 05:59:44 | INFO : Framewise Total Error:   0.4783275971687603
+2021-12-02 05:59:44 | INFO : Framewise Chroma Precision:   0.7138217622450875
+2021-12-02 05:59:44 | INFO : Framewise Chroma Recall:   0.7628746628969295
+2021-12-02 05:59:44 | INFO : Framewise Chroma Accuracy:   0.588773934620552
+2021-12-02 05:59:44 | INFO : Framewise Chroma Substitution Error:   0.09082914492059302
+2021-12-02 05:59:44 | INFO : Framewise Chroma Miss Error:   0.14629619218247755
+2021-12-02 05:59:44 | INFO : Framewise Chroma False Alarm Error:   0.21760473788404242
+2021-12-02 05:59:44 | INFO : Framewise Chroma Total Error:   0.4547300749871131

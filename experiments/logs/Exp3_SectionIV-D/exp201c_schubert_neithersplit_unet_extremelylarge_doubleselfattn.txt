@@ -1,0 +1,328 @@
+2021-12-02 21:43:11 | INFO : Logging experiment exp201c_traintest_schubert_versionsplit_pitch_unet_extremelylarge_doubleselfattn_posencsinusoidal_augall_AdamW
+2021-12-02 21:43:11 | INFO : Experiment config: do training = True
+2021-12-02 21:43:11 | INFO : Experiment config: do validation = True
+2021-12-02 21:43:11 | INFO : Experiment config: do testing = True
+2021-12-02 21:43:11 | INFO : Training set parameters: {'context': 75, 'stride': 5, 'compression': 10, 'aug:transpsemitones': 5, 'aug:randomeq': 20, 'aug:noisestd': 0.0001, 'aug:tuning': True}
+2021-12-02 21:43:11 | INFO : Validation set parameters: {'context': 75, 'stride': 5, 'compression': 10}
+2021-12-02 21:43:11 | INFO : Test set parameters: {'context': 75, 'stride': 1, 'compression': 10}
+2021-12-02 21:43:11 | INFO : Training parameters: {'batch_size': 25, 'shuffle': True, 'num_workers': 16}
+2021-12-02 21:43:11 | INFO : Trained model saved in /tsi/clusterhome/cweiss/models/exp201c_traintest_schubert_versionsplit_pitch_unet_extremelylarge_doubleselfattn_posencsinusoidal_augall_AdamW.pt
+2021-12-02 21:43:11 | INFO :  --- Training config: ----------------------------------------- 
+2021-12-02 21:43:11 | INFO : Maximum number of epochs: 100
+2021-12-02 21:43:11 | INFO : Criterion (Loss): BCELoss
+2021-12-02 21:43:11 | INFO : Optimizer parameters: {'name': 'AdamW', 'initial_lr': 0.001, 'betas': (0.9, 0.999), 'eps': 1e-08, 'weight_decay': 0.01, 'amsgrad': False}
+2021-12-02 21:43:11 | INFO : Scheduler parameters: {'use_scheduler': True, 'name': 'ReduceLROnPlateau', 'mode': 'min', 'factor': 0.5, 'patience': 5, 'threshold': 0.0001, 'threshold_mode': 'rel', 'cooldown': 0, 'min_lr': 1e-06, 'eps': 1e-08, 'verbose': False}
+2021-12-02 21:43:11 | INFO : Early stopping parameters: {'use_early_stopping': True, 'mode': 'min', 'min_delta': 1e-05, 'patience': 12, 'percentage': False}
+2021-12-02 21:43:11 | INFO : Test parameters: {'batch_size': 50, 'shuffle': False, 'num_workers': 8}
+2021-12-02 21:43:11 | INFO : Save filewise results = True, in folder /tsi/clusterhome/cweiss/code/deep_pitch_estimation/experiments/results_filewise/exp201c_traintest_schubert_versionsplit_pitch_unet_extremelylarge_doubleselfattn_posencsinusoidal_augall_AdamW.csv
+2021-12-02 21:43:11 | INFO : Save model predictions = True, in folder /tsi/clusterhome/cweiss/predictions/exp201c_traintest_schubert_versionsplit_pitch_unet_extremelylarge_doubleselfattn_posencsinusoidal_augall_AdamW
+2021-12-02 21:43:11 | INFO : CUDA use_cuda: True
+2021-12-02 21:43:11 | INFO : CUDA device: cuda:0
+2021-12-02 21:43:15 | INFO :  --- Model config: -------------------------------------------- 
+2021-12-02 21:43:15 | INFO : Model: simple_u_net_doubleselfattn
+2021-12-02 21:43:15 | INFO : Model parameters: {'n_chan_input': 6, 'n_chan_layers': [128, 80, 50, 30], 'n_ch_out': 2, 'n_bins_in': 216, 'n_bins_out': 72, 'a_lrelu': 0.3, 'p_dropout': 0.2, 'scalefac': 4, 'embed_dim': 128, 'num_heads': 8, 'mlp_dim': 8192, 'pos_encoding': 'sinusoidal'}
+2021-12-02 21:43:16 | INFO : 
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+├─LayerNorm: 1-1                         [1, 174, 6, 216]          2,592
+├─double_conv: 1-2                       [1, 16, 174, 216]         --
+|    └─Sequential: 2-1                   [1, 16, 174, 216]         --
+|    |    └─Conv2d: 3-1                  [1, 16, 174, 216]         21,616
+|    |    └─BatchNorm2d: 3-2             [1, 16, 174, 216]         32
+|    |    └─ReLU: 3-3                    [1, 16, 174, 216]         --
+|    |    └─Dropout: 3-4                 [1, 16, 174, 216]         --
+|    |    └─Conv2d: 3-5                  [1, 16, 174, 216]         57,616
+|    |    └─BatchNorm2d: 3-6             [1, 16, 174, 216]         32
+|    |    └─ReLU: 3-7                    [1, 16, 174, 216]         --
+|    |    └─Dropout: 3-8                 [1, 16, 174, 216]         --
+├─Sequential: 1-3                        [1, 32, 87, 108]          --
+|    └─MaxPool2d: 2-2                    [1, 16, 87, 108]          --
+|    └─double_conv: 2-3                  [1, 32, 87, 108]          --
+|    |    └─Sequential: 3-9              [1, 32, 87, 108]          345,792
+├─Sequential: 1-4                        [1, 64, 43, 54]           --
+|    └─MaxPool2d: 2-4                    [1, 32, 43, 54]           --
+|    └─double_conv: 2-5                  [1, 64, 43, 54]           --
+|    |    └─Sequential: 3-10             [1, 64, 43, 54]           498,048
+├─Sequential: 1-5                        [1, 128, 21, 27]          --
+|    └─MaxPool2d: 2-6                    [1, 64, 21, 27]           --
+|    └─double_conv: 2-7                  [1, 128, 21, 27]          --
+|    |    └─Sequential: 3-11             [1, 128, 21, 27]          615,168
+├─Sequential: 1-6                        [1, 128, 10, 13]          --
+|    └─MaxPool2d: 2-8                    [1, 128, 10, 13]          --
+|    └─double_conv: 2-9                  [1, 128, 10, 13]          --
+|    |    └─Sequential: 3-12             [1, 128, 10, 13]          295,680
+├─transformer_enc_layer: 1-7             [1, 128, 10, 13]          --
+|    └─Flatten: 2-10                     [1, 128, 130]             --
+|    └─Dropout: 2-11                     [1, 130, 128]             --
+|    └─Linear: 2-12                      [1, 130, 128]             16,384
+|    └─Linear: 2-13                      [1, 130, 128]             16,384
+|    └─Linear: 2-14                      [1, 130, 128]             16,384
+|    └─MultiheadAttention: 2-15          [1, 130, 128]             --
+|    └─Linear: 2-16                      [1, 130, 128]             16,384
+|    └─Dropout: 2-17                     [1, 130, 128]             --
+|    └─LayerNorm: 2-18                   [1, 130, 128]             256
+|    └─Sequential: 2-19                  [1, 130, 128]             --
+|    |    └─Linear: 3-13                 [1, 130, 8192]            1,056,768
+|    |    └─ReLU: 3-14                   [1, 130, 8192]            --
+|    |    └─Linear: 3-15                 [1, 130, 128]             1,048,704
+|    └─Dropout: 2-20                     [1, 130, 128]             --
+|    └─LayerNorm: 2-21                   [1, 130, 128]             256
+├─transformer_enc_layer: 1-8             [1, 128, 10, 13]          --
+|    └─Flatten: 2-22                     [1, 128, 130]             --
+|    └─Linear: 2-23                      [1, 130, 128]             16,384
+|    └─Linear: 2-24                      [1, 130, 128]             16,384
+|    └─Linear: 2-25                      [1, 130, 128]             16,384
+|    └─MultiheadAttention: 2-26          [1, 130, 128]             --
+|    └─Linear: 2-27                      [1, 130, 128]             16,384
+|    └─Dropout: 2-28                     [1, 130, 128]             --
+|    └─LayerNorm: 2-29                   [1, 130, 128]             256
+|    └─Sequential: 2-30                  [1, 130, 128]             --
+|    |    └─Linear: 3-16                 [1, 130, 8192]            1,056,768
+|    |    └─ReLU: 3-17                   [1, 130, 8192]            --
+|    |    └─Linear: 3-18                 [1, 130, 128]             1,048,704
+|    └─Dropout: 2-31                     [1, 130, 128]             --
+|    └─LayerNorm: 2-32                   [1, 130, 128]             256
+├─unet_up_concat_padding: 1-9            [1, 256, 21, 27]          --
+|    └─Upsample: 2-33                    [1, 128, 20, 26]          --
+├─double_conv: 1-10                      [1, 64, 21, 27]           --
+|    └─Sequential: 2-34                  [1, 64, 21, 27]           --
+|    |    └─Conv2d: 3-19                 [1, 128, 21, 27]          295,040
+|    |    └─BatchNorm2d: 3-20            [1, 128, 21, 27]          256
+|    |    └─ReLU: 3-21                   [1, 128, 21, 27]          --
+|    |    └─Dropout: 3-22                [1, 128, 21, 27]          --
+|    |    └─Conv2d: 3-23                 [1, 64, 21, 27]           73,792
+|    |    └─BatchNorm2d: 3-24            [1, 64, 21, 27]           128
+|    |    └─ReLU: 3-25                   [1, 64, 21, 27]           --
+|    |    └─Dropout: 3-26                [1, 64, 21, 27]           --
+├─unet_up_concat_padding: 1-11           [1, 128, 43, 54]          --
+|    └─Upsample: 2-35                    [1, 64, 42, 54]           --
+├─double_conv: 1-12                      [1, 32, 43, 54]           --
+|    └─Sequential: 2-36                  [1, 32, 43, 54]           --
+|    |    └─Conv2d: 3-27                 [1, 64, 43, 54]           204,864
+|    |    └─BatchNorm2d: 3-28            [1, 64, 43, 54]           128
+|    |    └─ReLU: 3-29                   [1, 64, 43, 54]           --
+|    |    └─Dropout: 3-30                [1, 64, 43, 54]           --
+|    |    └─Conv2d: 3-31                 [1, 32, 43, 54]           51,232
+|    |    └─BatchNorm2d: 3-32            [1, 32, 43, 54]           64
+|    |    └─ReLU: 3-33                   [1, 32, 43, 54]           --
+|    |    └─Dropout: 3-34                [1, 32, 43, 54]           --
+├─unet_up_concat_padding: 1-13           [1, 64, 87, 108]          --
+|    └─Upsample: 2-37                    [1, 32, 86, 108]          --
+├─double_conv: 1-14                      [1, 16, 87, 108]          --
+|    └─Sequential: 2-38                  [1, 16, 87, 108]          --
+|    |    └─Conv2d: 3-35                 [1, 32, 87, 108]          165,920
+|    |    └─BatchNorm2d: 3-36            [1, 32, 87, 108]          64
+|    |    └─ReLU: 3-37                   [1, 32, 87, 108]          --
+|    |    └─Dropout: 3-38                [1, 32, 87, 108]          --
+|    |    └─Conv2d: 3-39                 [1, 16, 87, 108]          41,488
+|    |    └─BatchNorm2d: 3-40            [1, 16, 87, 108]          32
+|    |    └─ReLU: 3-41                   [1, 16, 87, 108]          --
+|    |    └─Dropout: 3-42                [1, 16, 87, 108]          --
+├─unet_up_concat_padding: 1-15           [1, 32, 174, 216]         --
+|    └─Upsample: 2-39                    [1, 16, 174, 216]         --
+├─double_conv: 1-16                      [1, 128, 174, 216]        --
+|    └─Sequential: 2-40                  [1, 128, 174, 216]        --
+|    |    └─Conv2d: 3-43                 [1, 16, 174, 216]         115,216
+|    |    └─BatchNorm2d: 3-44            [1, 16, 174, 216]         32
+|    |    └─ReLU: 3-45                   [1, 16, 174, 216]         --
+|    |    └─Dropout: 3-46                [1, 16, 174, 216]         --
+|    |    └─Conv2d: 3-47                 [1, 128, 174, 216]        460,928
+|    |    └─BatchNorm2d: 3-48            [1, 128, 174, 216]        256
+|    |    └─ReLU: 3-49                   [1, 128, 174, 216]        --
+|    |    └─Dropout: 3-50                [1, 128, 174, 216]        --
+├─Sequential: 1-17                       [1, 80, 174, 72]          --
+|    └─Conv2d: 2-41                      [1, 80, 174, 72]          92,240
+|    └─LeakyReLU: 2-42                   [1, 80, 174, 72]          --
+|    └─MaxPool2d: 2-43                   [1, 80, 174, 72]          --
+|    └─Dropout: 2-44                     [1, 80, 174, 72]          --
+├─Sequential: 1-18                       [1, 50, 100, 72]          --
+|    └─Conv2d: 2-45                      [1, 50, 100, 72]          300,050
+|    └─LeakyReLU: 2-46                   [1, 50, 100, 72]          --
+|    └─Dropout: 2-47                     [1, 50, 100, 72]          --
+├─Sequential: 1-19                       [1, 1, 100, 72]           --
+|    └─Conv2d: 2-48                      [1, 30, 100, 72]          1,530
+|    └─LeakyReLU: 2-49                   [1, 30, 100, 72]          --
+|    └─Dropout: 2-50                     [1, 30, 100, 72]          --
+|    └─Conv2d: 2-51                      [1, 1, 100, 72]           31
+|    └─Sigmoid: 2-52                     [1, 1, 100, 72]           --
+==========================================================================================
+Total params: 7,982,907
+Trainable params: 7,982,907
+Non-trainable params: 0
+Total mult-adds (G): 35.51
+==========================================================================================
+Input size (MB): 0.90
+Forward/backward pass size (MB): 168.98
+Params size (MB): 31.93
+Estimated Total Size (MB): 201.82
+==========================================================================================
+2021-12-02 21:43:16 | INFO :  - file Schubert_D911-06_AL98.npy added to training set.
+2021-12-02 21:43:16 | INFO :  - file Schubert_D911-11_OL06.npy added to training set.
+2021-12-02 21:43:17 | INFO :  - file Schubert_D911-10_FI80.npy added to training set.
+2021-12-02 21:43:17 | INFO :  - file Schubert_D911-05_FI80.npy added to training set.
+2021-12-02 21:43:17 | INFO :  - file Schubert_D911-06_QU98.npy added to training set.
+2021-12-02 21:43:18 | INFO :  - file Schubert_D911-04_FI80.npy added to training set.
+2021-12-02 21:43:18 | INFO :  - file Schubert_D911-05_QU98.npy added to training set.
+2021-12-02 21:43:18 | INFO :  - file Schubert_D911-12_AL98.npy added to training set.
+2021-12-02 21:43:18 | INFO :  - file Schubert_D911-10_AL98.npy added to training set.
+2021-12-02 21:43:18 | INFO :  - file Schubert_D911-04_FI55.npy added to training set.
+2021-12-02 21:43:18 | INFO :  - file Schubert_D911-04_AL98.npy added to training set.
+2021-12-02 21:43:18 | INFO :  - file Schubert_D911-14_TR99.npy added to validation set.
+2021-12-02 21:43:19 | INFO :  - file Schubert_D911-10_FI55.npy added to training set.
+2021-12-02 21:43:19 | INFO :  - file Schubert_D911-02_FI55.npy added to training set.
+2021-12-02 21:43:19 | INFO :  - file Schubert_D911-03_AL98.npy added to training set.
+2021-12-02 21:43:19 | INFO :  - file Schubert_D911-10_OL06.npy added to training set.
+2021-12-02 21:43:20 | INFO :  - file Schubert_D911-15_FI66.npy added to validation set.
+2021-12-02 21:43:20 | INFO :  - file Schubert_D911-05_FI55.npy added to training set.
+2021-12-02 21:43:20 | INFO :  - file Schubert_D911-09_FI55.npy added to training set.
+2021-12-02 21:43:20 | INFO :  - file Schubert_D911-13_OL06.npy added to training set.
+2021-12-02 21:43:20 | INFO :  - file Schubert_D911-03_QU98.npy added to training set.
+2021-12-02 21:43:21 | INFO :  - file Schubert_D911-15_TR99.npy added to validation set.
+2021-12-02 21:43:21 | INFO :  - file Schubert_D911-13_QU98.npy added to training set.
+2021-12-02 21:43:21 | INFO :  - file Schubert_D911-13_AL98.npy added to training set.
+2021-12-02 21:43:21 | INFO :  - file Schubert_D911-08_FI80.npy added to training set.
+2021-12-02 21:43:22 | INFO :  - file Schubert_D911-13_FI80.npy added to training set.
+2021-12-02 21:43:22 | INFO :  - file Schubert_D911-16_FI66.npy added to validation set.
+2021-12-02 21:43:22 | INFO :  - file Schubert_D911-03_OL06.npy added to training set.
+2021-12-02 21:43:22 | INFO :  - file Schubert_D911-11_FI55.npy added to training set.
+2021-12-02 21:43:22 | INFO :  - file Schubert_D911-02_OL06.npy added to training set.
+2021-12-02 21:43:23 | INFO :  - file Schubert_D911-06_FI80.npy added to training set.
+2021-12-02 21:43:23 | INFO :  - file Schubert_D911-01_FI80.npy added to training set.
+2021-12-02 21:43:23 | INFO :  - file Schubert_D911-01_AL98.npy added to training set.
+2021-12-02 21:43:24 | INFO :  - file Schubert_D911-01_OL06.npy added to training set.
+2021-12-02 21:43:24 | INFO :  - file Schubert_D911-16_TR99.npy added to validation set.
+2021-12-02 21:43:24 | INFO :  - file Schubert_D911-03_FI80.npy added to training set.
+2021-12-02 21:43:25 | INFO :  - file Schubert_D911-04_QU98.npy added to training set.
+2021-12-02 21:43:25 | INFO :  - file Schubert_D911-11_AL98.npy added to training set.
+2021-12-02 21:43:25 | INFO :  - file Schubert_D911-10_QU98.npy added to training set.
+2021-12-02 21:43:26 | INFO :  - file Schubert_D911-13_FI55.npy added to training set.
+2021-12-02 21:43:26 | INFO :  - file Schubert_D911-09_AL98.npy added to training set.
+2021-12-02 21:43:26 | INFO :  - file Schubert_D911-01_QU98.npy added to training set.
+2021-12-02 21:43:26 | INFO :  - file Schubert_D911-04_OL06.npy added to training set.
+2021-12-02 21:43:27 | INFO :  - file Schubert_D911-05_AL98.npy added to training set.
+2021-12-02 21:43:27 | INFO :  - file Schubert_D911-02_QU98.npy added to training set.
+2021-12-02 21:43:28 | INFO :  - file Schubert_D911-07_OL06.npy added to training set.
+2021-12-02 21:43:28 | INFO :  - file Schubert_D911-11_FI80.npy added to training set.
+2021-12-02 21:43:28 | INFO :  - file Schubert_D911-06_OL06.npy added to training set.
+2021-12-02 21:43:28 | INFO :  - file Schubert_D911-07_QU98.npy added to training set.
+2021-12-02 21:43:29 | INFO :  - file Schubert_D911-01_FI55.npy added to training set.
+2021-12-02 21:43:30 | INFO :  - file Schubert_D911-03_FI55.npy added to training set.
+2021-12-02 21:43:30 | INFO :  - file Schubert_D911-05_OL06.npy added to training set.
+2021-12-02 21:43:30 | INFO :  - file Schubert_D911-12_QU98.npy added to training set.
+2021-12-02 21:43:30 | INFO :  - file Schubert_D911-14_FI66.npy added to validation set.
+2021-12-02 21:43:31 | INFO :  - file Schubert_D911-11_QU98.npy added to training set.
+2021-12-02 21:43:31 | INFO :  - file Schubert_D911-06_FI55.npy added to training set.
+2021-12-02 21:43:32 | INFO :  - file Schubert_D911-02_AL98.npy added to training set.
+2021-12-02 21:43:32 | INFO :  - file Schubert_D911-09_OL06.npy added to training set.
+2021-12-02 21:43:32 | INFO :  - file Schubert_D911-12_FI80.npy added to training set.
+2021-12-02 21:43:32 | INFO :  - file Schubert_D911-08_OL06.npy added to training set.
+2021-12-02 21:43:33 | INFO :  - file Schubert_D911-09_FI80.npy added to training set.
+2021-12-02 21:43:33 | INFO :  - file Schubert_D911-09_QU98.npy added to training set.
+2021-12-02 21:43:33 | INFO :  - file Schubert_D911-07_FI55.npy added to training set.
+2021-12-02 21:43:34 | INFO :  - file Schubert_D911-02_FI80.npy added to training set.
+2021-12-02 21:43:34 | INFO :  - file Schubert_D911-08_QU98.npy added to training set.
+2021-12-02 21:43:34 | INFO :  - file Schubert_D911-08_FI55.npy added to training set.
+2021-12-02 21:43:34 | INFO :  - file Schubert_D911-07_FI80.npy added to training set.
+2021-12-02 21:43:35 | INFO :  - file Schubert_D911-07_AL98.npy added to training set.
+2021-12-02 21:43:36 | INFO :  - file Schubert_D911-12_FI55.npy added to training set.
+2021-12-02 21:43:36 | INFO :  - file Schubert_D911-08_AL98.npy added to training set.
+2021-12-02 21:43:36 | INFO :  - file Schubert_D911-12_OL06.npy added to training set.
+2021-12-02 21:43:36 | INFO : Training set & loader generated, length 111389
+2021-12-02 21:43:36 | INFO : Validation set & loader generated, length 7573
+2021-12-02 21:43:36 | INFO : 
+ 
+ ###################### START TRAINING ###################### 
+
+2021-12-02 22:13:18 | INFO : Epoch #0 finished. Train Loss: 0.0739, Val Loss: 0.0770 with lr: 0.00100
+2021-12-02 22:13:19 | INFO :   .... model of epoch 0 saved.
+2021-12-02 22:27:08 | INFO : Epoch #1 finished. Train Loss: 0.0566, Val Loss: 0.0788 with lr: 0.00100
+2021-12-02 22:40:57 | INFO : Epoch #2 finished. Train Loss: 0.0483, Val Loss: 0.0914 with lr: 0.00100
+2021-12-02 22:54:45 | INFO : Epoch #3 finished. Train Loss: 0.0424, Val Loss: 0.0846 with lr: 0.00100
+2021-12-02 23:08:34 | INFO : Epoch #4 finished. Train Loss: 0.0384, Val Loss: 0.1029 with lr: 0.00100
+2021-12-02 23:22:23 | INFO : Epoch #5 finished. Train Loss: 0.0353, Val Loss: 0.1114 with lr: 0.00100
+2021-12-02 23:36:12 | INFO : Epoch #6 finished. Train Loss: 0.0330, Val Loss: 0.1151 with lr: 0.00100
+2021-12-02 23:50:00 | INFO : Epoch #7 finished. Train Loss: 0.0272, Val Loss: 0.1189 with lr: 0.00050
+2021-12-03 00:03:49 | INFO : Epoch #8 finished. Train Loss: 0.0255, Val Loss: 0.1270 with lr: 0.00050
+2021-12-03 00:17:38 | INFO : Epoch #9 finished. Train Loss: 0.0243, Val Loss: 0.1360 with lr: 0.00050
+2021-12-03 00:31:26 | INFO : Epoch #10 finished. Train Loss: 0.0234, Val Loss: 0.1218 with lr: 0.00050
+2021-12-03 00:45:14 | INFO : Epoch #11 finished. Train Loss: 0.0224, Val Loss: 0.1325 with lr: 0.00050
+2021-12-03 00:59:03 | INFO : Epoch #12 finished. Train Loss: 0.0216, Val Loss: 0.1421 with lr: 0.00050
+2021-12-03 00:59:03 | INFO :  ### trained model saved in /tsi/clusterhome/cweiss/models/exp201c_traintest_schubert_versionsplit_pitch_unet_extremelylarge_doubleselfattn_posencsinusoidal_augall_AdamW.pt 
+
+2021-12-03 00:59:03 | INFO : 
+ 
+ ###################### START TESTING ###################### 
+
+2021-12-03 00:59:34 | INFO : file Schubert_D911-20_SC06.npy tested. Cosine sim: 0.8180236399207529
+2021-12-03 01:00:00 | INFO : file Schubert_D911-21_SC06.npy tested. Cosine sim: 0.8135814385800847
+2021-12-03 01:00:23 | INFO : file Schubert_D911-21_HU33.npy tested. Cosine sim: 0.8382925238043332
+2021-12-03 01:00:29 | INFO : file Schubert_D911-18_HU33.npy tested. Cosine sim: 0.7672862830185497
+2021-12-03 01:00:39 | INFO : file Schubert_D911-22_HU33.npy tested. Cosine sim: 0.7849663264566976
+2021-12-03 01:01:00 | INFO : file Schubert_D911-23_HU33.npy tested. Cosine sim: 0.7153392552377718
+2021-12-03 01:01:25 | INFO : file Schubert_D911-20_HU33.npy tested. Cosine sim: 0.8155765501432137
+2021-12-03 01:01:32 | INFO : file Schubert_D911-18_SC06.npy tested. Cosine sim: 0.7638693658721938
+2021-12-03 01:01:41 | INFO : file Schubert_D911-22_SC06.npy tested. Cosine sim: 0.7928654310789693
+2021-12-03 01:02:00 | INFO : file Schubert_D911-24_HU33.npy tested. Cosine sim: 0.7016148360979054
+2021-12-03 01:02:09 | INFO : file Schubert_D911-19_SC06.npy tested. Cosine sim: 0.7569033081745735
+2021-12-03 01:02:27 | INFO : file Schubert_D911-23_SC06.npy tested. Cosine sim: 0.7788097752192891
+2021-12-03 01:02:49 | INFO : file Schubert_D911-24_SC06.npy tested. Cosine sim: 0.7677144305678171
+2021-12-03 01:03:10 | INFO : file Schubert_D911-17_HU33.npy tested. Cosine sim: 0.7224547673201922
+2021-12-03 01:03:30 | INFO : file Schubert_D911-17_SC06.npy tested. Cosine sim: 0.6512849400851654
+2021-12-03 01:03:38 | INFO : file Schubert_D911-19_HU33.npy tested. Cosine sim: 0.6531767984037521
+2021-12-03 01:03:38 | INFO : ### Testing done. ################################################ 
+
+2021-12-03 01:03:38 | INFO : #   Results for large test set (10 files) ######################### 
+
+2021-12-03 01:03:38 | INFO : Mean precision:   0.767758901547119
+2021-12-03 01:03:38 | INFO : Mean recall:   0.6363994396227547
+2021-12-03 01:03:38 | INFO : Mean f_measure:   0.6927269322590968
+2021-12-03 01:03:38 | INFO : Mean cosine_sim:   0.7588599793738289
+2021-12-03 01:03:38 | INFO : Mean binary_crossentropy:   0.11530795048357734
+2021-12-03 01:03:38 | INFO : Mean euclidean_distance:   1.154443325884454
+2021-12-03 01:03:38 | INFO : Mean binary_accuracy:   0.9710180776315013
+2021-12-03 01:03:38 | INFO : Mean soft_accuracy:   0.9632643188378303
+2021-12-03 01:03:38 | INFO : Mean accum_energy:   0.5289052830024145
+2021-12-03 01:03:38 | INFO : Mean roc_auc_measure:   0.9768165887226392
+2021-12-03 01:03:38 | INFO : Mean average_precision_score:   0.7755755859182074
+2021-12-03 01:03:38 | INFO : Mean Precision:   0.767758901547119
+2021-12-03 01:03:38 | INFO : Mean Recall:   0.6363994396227547
+2021-12-03 01:03:38 | INFO : Mean Accuracy:   0.5341802677014674
+2021-12-03 01:03:38 | INFO : Mean Substitution Error:   0.10858916269059837
+2021-12-03 01:03:38 | INFO : Mean Miss Error:   0.25501139768664693
+2021-12-03 01:03:38 | INFO : Mean False Alarm Error:   0.08862544475857126
+2021-12-03 01:03:38 | INFO : Mean Total Error:   0.4522260051358166
+2021-12-03 01:03:38 | INFO : Mean Chroma Precision:   0.81242151742682
+2021-12-03 01:03:38 | INFO : Mean Chroma Recall:   0.6732546547538921
+2021-12-03 01:03:38 | INFO : Mean Chroma Accuracy:   0.5815696910387792
+2021-12-03 01:03:38 | INFO : Mean Chroma Substitution Error:   0.07173394755946091
+2021-12-03 01:03:38 | INFO : Mean Chroma Miss Error:   0.25501139768664693
+2021-12-03 01:03:38 | INFO : Mean Chroma False Alarm Error:   0.08862544475857126
+2021-12-03 01:03:38 | INFO : Mean Chroma Total Error:   0.415370790004679
+2021-12-03 01:03:38 | INFO : 
+
+2021-12-03 01:03:38 | INFO : Framewise precision:   0.7712002161469156
+2021-12-03 01:03:38 | INFO : Framewise recall:   0.6563378898316392
+2021-12-03 01:03:38 | INFO : Framewise f_measure:   0.7062415045216371
+2021-12-03 01:03:38 | INFO : Framewise cosine_sim:   0.764723693250959
+2021-12-03 01:03:38 | INFO : Framewise binary_crossentropy:   0.11012546018042246
+2021-12-03 01:03:38 | INFO : Framewise euclidean_distance:   1.1355678480916562
+2021-12-03 01:03:38 | INFO : Framewise binary_accuracy:   0.9719447384497543
+2021-12-03 01:03:38 | INFO : Framewise soft_accuracy:   0.9644816995882005
+2021-12-03 01:03:38 | INFO : Framewise accum_energy:   0.5467322919303957
+2021-12-03 01:03:38 | INFO : Framewise roc_auc_measure:   0.9795375044136881
+2021-12-03 01:03:38 | INFO : Framewise average_precision_score:   0.7879778968083444
+2021-12-03 01:03:38 | INFO : Framewise Precision:   0.7712002161469156
+2021-12-03 01:03:38 | INFO : Framewise Recall:   0.6563378898316392
+2021-12-03 01:03:38 | INFO : Framewise Accuracy:   0.5504843708901215
+2021-12-03 01:03:38 | INFO : Framewise Substitution Error:   0.10183385163062826
+2021-12-03 01:03:38 | INFO : Framewise Miss Error:   0.24182825853773246
+2021-12-03 01:03:38 | INFO : Framewise False Alarm Error:   0.09707396993875249
+2021-12-03 01:03:38 | INFO : Framewise Total Error:   0.4407360801071132
+2021-12-03 01:03:38 | INFO : Framewise Chroma Precision:   0.8122383117456482
+2021-12-03 01:03:38 | INFO : Framewise Chroma Recall:   0.6907917792661356
+2021-12-03 01:03:38 | INFO : Framewise Chroma Accuracy:   0.5951330114216429
+2021-12-03 01:03:38 | INFO : Framewise Chroma Substitution Error:   0.06737996219613206
+2021-12-03 01:03:38 | INFO : Framewise Chroma Miss Error:   0.24182825853773246
+2021-12-03 01:03:38 | INFO : Framewise Chroma False Alarm Error:   0.09707396993875249
+2021-12-03 01:03:38 | INFO : Framewise Chroma Total Error:   0.4062821906726169

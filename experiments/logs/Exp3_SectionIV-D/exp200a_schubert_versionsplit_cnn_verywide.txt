@@ -1,0 +1,402 @@
+2021-12-03 14:53:18 | INFO : Logging experiment exp200a_traintest_schubert_versionsplit_pitch_cnn_verywide_augall_AdamW
+2021-12-03 14:53:18 | INFO : Experiment config: do training = True
+2021-12-03 14:53:18 | INFO : Experiment config: do validation = True
+2021-12-03 14:53:18 | INFO : Experiment config: do testing = True
+2021-12-03 14:53:18 | INFO : Training set parameters: {'context': 75, 'stride': 10, 'compression': 10, 'aug:transpsemitones': 5, 'aug:randomeq': 20, 'aug:noisestd': 0.0001, 'aug:tuning': True}
+2021-12-03 14:53:18 | INFO : Validation set parameters: {'context': 75, 'stride': 10, 'compression': 10}
+2021-12-03 14:53:18 | INFO : Test set parameters: {'context': 75, 'stride': 1, 'compression': 10}
+2021-12-03 14:53:18 | INFO : Training parameters: {'batch_size': 25, 'shuffle': True, 'num_workers': 16}
+2021-12-03 14:53:18 | INFO : Trained model saved in /tsi/clusterhome/cweiss/models/exp200a_traintest_schubert_versionsplit_pitch_cnn_verywide_augall_AdamW.pt
+2021-12-03 14:53:18 | INFO :  --- Training config: ----------------------------------------- 
+2021-12-03 14:53:18 | INFO : Maximum number of epochs: 100
+2021-12-03 14:53:18 | INFO : Criterion (Loss): BCELoss
+2021-12-03 14:53:18 | INFO : Optimizer parameters: {'name': 'AdamW', 'initial_lr': 0.001, 'betas': (0.9, 0.999), 'eps': 1e-08, 'weight_decay': 0.01, 'amsgrad': False}
+2021-12-03 14:53:18 | INFO : Scheduler parameters: {'use_scheduler': True, 'name': 'ReduceLROnPlateau', 'mode': 'min', 'factor': 0.5, 'patience': 5, 'threshold': 0.0001, 'threshold_mode': 'rel', 'cooldown': 0, 'min_lr': 1e-06, 'eps': 1e-08, 'verbose': False}
+2021-12-03 14:53:18 | INFO : Early stopping parameters: {'use_early_stopping': True, 'mode': 'min', 'min_delta': 1e-05, 'patience': 12, 'percentage': False}
+2021-12-03 14:53:18 | INFO : Test parameters: {'batch_size': 50, 'shuffle': False, 'num_workers': 8}
+2021-12-03 14:53:18 | INFO : Save filewise results = True, in folder /tsi/clusterhome/cweiss/code/deep_pitch_estimation/experiments/results_filewise/exp200a_traintest_schubert_versionsplit_pitch_cnn_verywide_augall_AdamW.csv
+2021-12-03 14:53:18 | INFO : Save model predictions = True, in folder /tsi/clusterhome/cweiss/predictions/exp200a_traintest_schubert_versionsplit_pitch_cnn_verywide_augall_AdamW
+2021-12-03 14:53:18 | INFO : CUDA use_cuda: True
+2021-12-03 14:53:18 | INFO : CUDA device: cuda:0
+2021-12-03 14:53:27 | INFO :  --- Model config: -------------------------------------------- 
+2021-12-03 14:53:27 | INFO : Model: basic_cnn_segm_sigmoid
+2021-12-03 14:53:27 | INFO : Model parameters: {'n_chan_input': 6, 'n_chan_layers': [250, 150, 100, 100], 'n_ch_out': 2, 'n_bins_in': 216, 'n_bins_out': 72, 'a_lrelu': 0.3, 'p_dropout': 0.2}
+2021-12-03 14:53:27 | INFO : 
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+├─LayerNorm: 1-1                         [1, 174, 6, 216]          2,592
+├─Sequential: 1-2                        [1, 250, 174, 216]        --
+|    └─Conv2d: 2-1                       [1, 250, 174, 216]        337,750
+|    └─LeakyReLU: 2-2                    [1, 250, 174, 216]        --
+|    └─MaxPool2d: 2-3                    [1, 250, 174, 216]        --
+|    └─Dropout: 2-4                      [1, 250, 174, 216]        --
+├─Sequential: 1-3                        [1, 150, 174, 72]         --
+|    └─Conv2d: 2-5                       [1, 150, 174, 72]         337,650
+|    └─LeakyReLU: 2-6                    [1, 150, 174, 72]         --
+|    └─MaxPool2d: 2-7                    [1, 150, 174, 72]         --
+|    └─Dropout: 2-8                      [1, 150, 174, 72]         --
+├─Sequential: 1-4                        [1, 100, 100, 72]         --
+|    └─Conv2d: 2-9                       [1, 100, 100, 72]         1,125,100
+|    └─LeakyReLU: 2-10                   [1, 100, 100, 72]         --
+|    └─Dropout: 2-11                     [1, 100, 100, 72]         --
+├─Sequential: 1-5                        [1, 1, 100, 72]           --
+|    └─Conv2d: 2-12                      [1, 100, 100, 72]         10,100
+|    └─LeakyReLU: 2-13                   [1, 100, 100, 72]         --
+|    └─Dropout: 2-14                     [1, 100, 100, 72]         --
+|    └─Conv2d: 2-15                      [1, 1, 100, 72]           101
+|    └─Sigmoid: 2-16                     [1, 1, 100, 72]           --
+==========================================================================================
+Total params: 1,813,293
+Trainable params: 1,813,293
+Non-trainable params: 0
+Total mult-adds (G): 25.09
+==========================================================================================
+Input size (MB): 0.90
+Forward/backward pass size (MB): 103.58
+Params size (MB): 7.25
+Estimated Total Size (MB): 111.74
+==========================================================================================
+2021-12-03 14:53:28 | INFO :  - file Schubert_D911-06_AL98.npy added to training set.
+2021-12-03 14:53:29 | INFO :  - file Schubert_D911-19_QU98.npy added to training set.
+2021-12-03 14:53:29 | INFO :  - file Schubert_D911-16_FI55.npy added to training set.
+2021-12-03 14:53:30 | INFO :  - file Schubert_D911-07_TR99.npy added to validation set.
+2021-12-03 14:53:31 | INFO :  - file Schubert_D911-11_OL06.npy added to training set.
+2021-12-03 14:53:32 | INFO :  - file Schubert_D911-10_FI80.npy added to training set.
+2021-12-03 14:53:33 | INFO :  - file Schubert_D911-21_FI66.npy added to validation set.
+2021-12-03 14:53:35 | INFO :  - file Schubert_D911-05_FI80.npy added to training set.
+2021-12-03 14:53:36 | INFO :  - file Schubert_D911-06_QU98.npy added to training set.
+2021-12-03 14:53:37 | INFO :  - file Schubert_D911-06_TR99.npy added to validation set.
+2021-12-03 14:53:37 | INFO :  - file Schubert_D911-18_FI80.npy added to training set.
+2021-12-03 14:53:38 | INFO :  - file Schubert_D911-04_FI80.npy added to training set.
+2021-12-03 14:53:39 | INFO :  - file Schubert_D911-05_QU98.npy added to training set.
+2021-12-03 14:53:40 | INFO :  - file Schubert_D911-17_OL06.npy added to training set.
+2021-12-03 14:53:41 | INFO :  - file Schubert_D911-10_TR99.npy added to validation set.
+2021-12-03 14:53:42 | INFO :  - file Schubert_D911-12_AL98.npy added to training set.
+2021-12-03 14:53:43 | INFO :  - file Schubert_D911-10_AL98.npy added to training set.
+2021-12-03 14:53:43 | INFO :  - file Schubert_D911-04_FI55.npy added to training set.
+2021-12-03 14:53:44 | INFO :  - file Schubert_D911-19_FI66.npy added to validation set.
+2021-12-03 14:53:44 | INFO :  - file Schubert_D911-09_TR99.npy added to validation set.
+2021-12-03 14:53:45 | INFO :  - file Schubert_D911-17_FI80.npy added to training set.
+2021-12-03 14:53:46 | INFO :  - file Schubert_D911-14_FI80.npy added to training set.
+2021-12-03 14:53:47 | INFO :  - file Schubert_D911-12_FI66.npy added to validation set.
+2021-12-03 14:53:48 | INFO :  - file Schubert_D911-04_AL98.npy added to training set.
+2021-12-03 14:53:48 | INFO :  - file Schubert_D911-16_FI80.npy added to training set.
+2021-12-03 14:53:49 | INFO :  - file Schubert_D911-13_TR99.npy added to validation set.
+2021-12-03 14:53:50 | INFO :  - file Schubert_D911-14_OL06.npy added to training set.
+2021-12-03 14:53:51 | INFO :  - file Schubert_D911-04_FI66.npy added to validation set.
+2021-12-03 14:53:51 | INFO :  - file Schubert_D911-16_OL06.npy added to training set.
+2021-12-03 14:53:52 | INFO :  - file Schubert_D911-17_AL98.npy added to training set.
+2021-12-03 14:53:53 | INFO :  - file Schubert_D911-08_FI66.npy added to validation set.
+2021-12-03 14:53:54 | INFO :  - file Schubert_D911-14_TR99.npy added to validation set.
+2021-12-03 14:53:55 | INFO :  - file Schubert_D911-10_FI55.npy added to training set.
+2021-12-03 14:53:56 | INFO :  - file Schubert_D911-06_FI66.npy added to validation set.
+2021-12-03 14:53:57 | INFO :  - file Schubert_D911-20_AL98.npy added to training set.
+2021-12-03 14:53:58 | INFO :  - file Schubert_D911-17_FI66.npy added to validation set.
+2021-12-03 14:53:59 | INFO :  - file Schubert_D911-24_FI80.npy added to training set.
+2021-12-03 14:53:59 | INFO :  - file Schubert_D911-02_FI55.npy added to training set.
+2021-12-03 14:54:00 | INFO :  - file Schubert_D911-03_AL98.npy added to training set.
+2021-12-03 14:54:01 | INFO :  - file Schubert_D911-23_TR99.npy added to validation set.
+2021-12-03 14:54:01 | INFO :  - file Schubert_D911-22_FI80.npy added to training set.
+2021-12-03 14:54:02 | INFO :  - file Schubert_D911-15_FI80.npy added to training set.
+2021-12-03 14:54:02 | INFO :  - file Schubert_D911-13_FI66.npy added to validation set.
+2021-12-03 14:54:03 | INFO :  - file Schubert_D911-10_OL06.npy added to training set.
+2021-12-03 14:54:04 | INFO :  - file Schubert_D911-23_AL98.npy added to training set.
+2021-12-03 14:54:04 | INFO :  - file Schubert_D911-02_FI66.npy added to validation set.
+2021-12-03 14:54:05 | INFO :  - file Schubert_D911-15_FI66.npy added to validation set.
+2021-12-03 14:54:06 | INFO :  - file Schubert_D911-21_AL98.npy added to training set.
+2021-12-03 14:54:07 | INFO :  - file Schubert_D911-20_TR99.npy added to validation set.
+2021-12-03 14:54:08 | INFO :  - file Schubert_D911-05_FI55.npy added to training set.
+2021-12-03 14:54:10 | INFO :  - file Schubert_D911-20_QU98.npy added to training set.
+2021-12-03 14:54:10 | INFO :  - file Schubert_D911-19_AL98.npy added to training set.
+2021-12-03 14:54:10 | INFO :  - file Schubert_D911-22_QU98.npy added to training set.
+2021-12-03 14:54:11 | INFO :  - file Schubert_D911-09_FI55.npy added to training set.
+2021-12-03 14:54:12 | INFO :  - file Schubert_D911-13_OL06.npy added to training set.
+2021-12-03 14:54:12 | INFO :  - file Schubert_D911-03_QU98.npy added to training set.
+2021-12-03 14:54:13 | INFO :  - file Schubert_D911-15_TR99.npy added to validation set.
+2021-12-03 14:54:14 | INFO :  - file Schubert_D911-20_OL06.npy added to training set.
+2021-12-03 14:54:14 | INFO :  - file Schubert_D911-13_QU98.npy added to training set.
+2021-12-03 14:54:15 | INFO :  - file Schubert_D911-13_AL98.npy added to training set.
+2021-12-03 14:54:16 | INFO :  - file Schubert_D911-08_FI80.npy added to training set.
+2021-12-03 14:54:17 | INFO :  - file Schubert_D911-14_FI55.npy added to training set.
+2021-12-03 14:54:17 | INFO :  - file Schubert_D911-09_FI66.npy added to validation set.
+2021-12-03 14:54:18 | INFO :  - file Schubert_D911-22_TR99.npy added to validation set.
+2021-12-03 14:54:18 | INFO :  - file Schubert_D911-13_FI80.npy added to training set.
+2021-12-03 14:54:19 | INFO :  - file Schubert_D911-16_FI66.npy added to validation set.
+2021-12-03 14:54:19 | INFO :  - file Schubert_D911-19_TR99.npy added to validation set.
+2021-12-03 14:54:20 | INFO :  - file Schubert_D911-03_OL06.npy added to training set.
+2021-12-03 14:54:21 | INFO :  - file Schubert_D911-21_TR99.npy added to validation set.
+2021-12-03 14:54:22 | INFO :  - file Schubert_D911-11_FI55.npy added to training set.
+2021-12-03 14:54:23 | INFO :  - file Schubert_D911-02_OL06.npy added to training set.
+2021-12-03 14:54:23 | INFO :  - file Schubert_D911-23_FI80.npy added to training set.
+2021-12-03 14:54:24 | INFO :  - file Schubert_D911-11_FI66.npy added to validation set.
+2021-12-03 14:54:25 | INFO :  - file Schubert_D911-06_FI80.npy added to training set.
+2021-12-03 14:54:27 | INFO :  - file Schubert_D911-01_FI80.npy added to training set.
+2021-12-03 14:54:28 | INFO :  - file Schubert_D911-23_FI55.npy added to training set.
+2021-12-03 14:54:29 | INFO :  - file Schubert_D911-01_AL98.npy added to training set.
+2021-12-03 14:54:30 | INFO :  - file Schubert_D911-01_TR99.npy added to validation set.
+2021-12-03 14:54:31 | INFO :  - file Schubert_D911-24_AL98.npy added to training set.
+2021-12-03 14:54:33 | INFO :  - file Schubert_D911-01_OL06.npy added to training set.
+2021-12-03 14:54:34 | INFO :  - file Schubert_D911-16_TR99.npy added to validation set.
+2021-12-03 14:54:34 | INFO :  - file Schubert_D911-19_FI80.npy added to training set.
+2021-12-03 14:54:35 | INFO :  - file Schubert_D911-24_OL06.npy added to training set.
+2021-12-03 14:54:36 | INFO :  - file Schubert_D911-16_QU98.npy added to training set.
+2021-12-03 14:54:36 | INFO :  - file Schubert_D911-03_FI80.npy added to training set.
+2021-12-03 14:54:37 | INFO :  - file Schubert_D911-04_QU98.npy added to training set.
+2021-12-03 14:54:38 | INFO :  - file Schubert_D911-23_QU98.npy added to training set.
+2021-12-03 14:54:39 | INFO :  - file Schubert_D911-17_TR99.npy added to validation set.
+2021-12-03 14:54:40 | INFO :  - file Schubert_D911-20_FI66.npy added to validation set.
+2021-12-03 14:54:40 | INFO :  - file Schubert_D911-17_QU98.npy added to training set.
+2021-12-03 14:54:41 | INFO :  - file Schubert_D911-14_QU98.npy added to training set.
+2021-12-03 14:54:42 | INFO :  - file Schubert_D911-11_AL98.npy added to training set.
+2021-12-03 14:54:43 | INFO :  - file Schubert_D911-07_FI66.npy added to validation set.
+2021-12-03 14:54:44 | INFO :  - file Schubert_D911-10_QU98.npy added to training set.
+2021-12-03 14:54:44 | INFO :  - file Schubert_D911-18_QU98.npy added to training set.
+2021-12-03 14:54:45 | INFO :  - file Schubert_D911-24_FI55.npy added to training set.
+2021-12-03 14:54:46 | INFO :  - file Schubert_D911-02_TR99.npy added to validation set.
+2021-12-03 14:54:46 | INFO :  - file Schubert_D911-03_FI66.npy added to validation set.
+2021-12-03 14:54:47 | INFO :  - file Schubert_D911-18_AL98.npy added to training set.
+2021-12-03 14:54:47 | INFO :  - file Schubert_D911-13_FI55.npy added to training set.
+2021-12-03 14:54:48 | INFO :  - file Schubert_D911-11_TR99.npy added to validation set.
+2021-12-03 14:54:49 | INFO :  - file Schubert_D911-09_AL98.npy added to training set.
+2021-12-03 14:54:49 | INFO :  - file Schubert_D911-19_FI55.npy added to training set.
+2021-12-03 14:54:51 | INFO :  - file Schubert_D911-01_QU98.npy added to training set.
+2021-12-03 14:54:51 | INFO :  - file Schubert_D911-18_TR99.npy added to validation set.
+2021-12-03 14:54:52 | INFO :  - file Schubert_D911-04_OL06.npy added to training set.
+2021-12-03 14:54:53 | INFO :  - file Schubert_D911-05_AL98.npy added to training set.
+2021-12-03 14:54:54 | INFO :  - file Schubert_D911-15_AL98.npy added to training set.
+2021-12-03 14:54:54 | INFO :  - file Schubert_D911-02_QU98.npy added to training set.
+2021-12-03 14:54:55 | INFO :  - file Schubert_D911-07_OL06.npy added to training set.
+2021-12-03 14:54:56 | INFO :  - file Schubert_D911-03_TR99.npy added to validation set.
+2021-12-03 14:54:56 | INFO :  - file Schubert_D911-18_FI55.npy added to training set.
+2021-12-03 14:54:57 | INFO :  - file Schubert_D911-14_AL98.npy added to training set.
+2021-12-03 14:54:58 | INFO :  - file Schubert_D911-04_TR99.npy added to validation set.
+2021-12-03 14:54:59 | INFO :  - file Schubert_D911-15_OL06.npy added to training set.
+2021-12-03 14:55:00 | INFO :  - file Schubert_D911-11_FI80.npy added to training set.
+2021-12-03 14:55:00 | INFO :  - file Schubert_D911-08_TR99.npy added to validation set.
+2021-12-03 14:55:02 | INFO :  - file Schubert_D911-06_OL06.npy added to training set.
+2021-12-03 14:55:02 | INFO :  - file Schubert_D911-07_QU98.npy added to training set.
+2021-12-03 14:55:03 | INFO :  - file Schubert_D911-18_FI66.npy added to validation set.
+2021-12-03 14:55:03 | INFO :  - file Schubert_D911-16_AL98.npy added to training set.
+2021-12-03 14:55:05 | INFO :  - file Schubert_D911-01_FI55.npy added to training set.
+2021-12-03 14:55:05 | INFO :  - file Schubert_D911-03_FI55.npy added to training set.
+2021-12-03 14:55:07 | INFO :  - file Schubert_D911-05_OL06.npy added to training set.
+2021-12-03 14:55:07 | INFO :  - file Schubert_D911-12_QU98.npy added to training set.
+2021-12-03 14:55:08 | INFO :  - file Schubert_D911-14_FI66.npy added to validation set.
+2021-12-03 14:55:09 | INFO :  - file Schubert_D911-22_FI66.npy added to validation set.
+2021-12-03 14:55:09 | INFO :  - file Schubert_D911-23_OL06.npy added to training set.
+2021-12-03 14:55:11 | INFO :  - file Schubert_D911-05_TR99.npy added to validation set.
+2021-12-03 14:55:11 | INFO :  - file Schubert_D911-12_TR99.npy added to validation set.
+2021-12-03 14:55:13 | INFO :  - file Schubert_D911-11_QU98.npy added to training set.
+2021-12-03 14:55:13 | INFO :  - file Schubert_D911-10_FI66.npy added to validation set.
+2021-12-03 14:55:15 | INFO :  - file Schubert_D911-21_QU98.npy added to training set.
+2021-12-03 14:55:16 | INFO :  - file Schubert_D911-06_FI55.npy added to training set.
+2021-12-03 14:55:16 | INFO :  - file Schubert_D911-02_AL98.npy added to training set.
+2021-12-03 14:55:17 | INFO :  - file Schubert_D911-22_FI55.npy added to training set.
+2021-12-03 14:55:18 | INFO :  - file Schubert_D911-09_OL06.npy added to training set.
+2021-12-03 14:55:19 | INFO :  - file Schubert_D911-12_FI80.npy added to training set.
+2021-12-03 14:55:20 | INFO :  - file Schubert_D911-24_TR99.npy added to validation set.
+2021-12-03 14:55:20 | INFO :  - file Schubert_D911-08_OL06.npy added to training set.
+2021-12-03 14:55:21 | INFO :  - file Schubert_D911-09_FI80.npy added to training set.
+2021-12-03 14:55:22 | INFO :  - file Schubert_D911-20_FI55.npy added to training set.
+2021-12-03 14:55:23 | INFO :  - file Schubert_D911-09_QU98.npy added to training set.
+2021-12-03 14:55:24 | INFO :  - file Schubert_D911-24_QU98.npy added to training set.
+2021-12-03 14:55:25 | INFO :  - file Schubert_D911-07_FI55.npy added to training set.
+2021-12-03 14:55:25 | INFO :  - file Schubert_D911-02_FI80.npy added to training set.
+2021-12-03 14:55:27 | INFO :  - file Schubert_D911-01_FI66.npy added to validation set.
+2021-12-03 14:55:28 | INFO :  - file Schubert_D911-08_QU98.npy added to training set.
+2021-12-03 14:55:28 | INFO :  - file Schubert_D911-08_FI55.npy added to training set.
+2021-12-03 14:55:29 | INFO :  - file Schubert_D911-23_FI66.npy added to validation set.
+2021-12-03 14:55:29 | INFO :  - file Schubert_D911-22_AL98.npy added to training set.
+2021-12-03 14:55:30 | INFO :  - file Schubert_D911-15_FI55.npy added to training set.
+2021-12-03 14:55:31 | INFO :  - file Schubert_D911-20_FI80.npy added to training set.
+2021-12-03 14:55:31 | INFO :  - file Schubert_D911-18_OL06.npy added to training set.
+2021-12-03 14:55:32 | INFO :  - file Schubert_D911-07_FI80.npy added to training set.
+2021-12-03 14:55:33 | INFO :  - file Schubert_D911-07_AL98.npy added to training set.
+2021-12-03 14:55:34 | INFO :  - file Schubert_D911-12_FI55.npy added to training set.
+2021-12-03 14:55:34 | INFO :  - file Schubert_D911-08_AL98.npy added to training set.
+2021-12-03 14:55:35 | INFO :  - file Schubert_D911-12_OL06.npy added to training set.
+2021-12-03 14:55:36 | INFO :  - file Schubert_D911-24_FI66.npy added to validation set.
+2021-12-03 14:55:36 | INFO :  - file Schubert_D911-22_OL06.npy added to training set.
+2021-12-03 14:55:38 | INFO :  - file Schubert_D911-21_OL06.npy added to training set.
+2021-12-03 14:55:39 | INFO :  - file Schubert_D911-05_FI66.npy added to validation set.
+2021-12-03 14:55:39 | INFO :  - file Schubert_D911-19_OL06.npy added to training set.
+2021-12-03 14:55:40 | INFO :  - file Schubert_D911-17_FI55.npy added to training set.
+2021-12-03 14:55:41 | INFO :  - file Schubert_D911-21_FI55.npy added to training set.
+2021-12-03 14:55:42 | INFO :  - file Schubert_D911-15_QU98.npy added to training set.
+2021-12-03 14:55:43 | INFO :  - file Schubert_D911-21_FI80.npy added to training set.
+2021-12-03 14:55:43 | INFO : Training set & loader generated, length 94229
+2021-12-03 14:55:43 | INFO : Validation set & loader generated, length 37536
+2021-12-03 14:55:43 | INFO : 
+ 
+ ###################### START TRAINING ###################### 
+
+2021-12-03 15:10:14 | INFO : Epoch #0 finished. Train Loss: 0.0830, Val Loss: 0.0767 with lr: 0.00100
+2021-12-03 15:10:14 | INFO :   .... model of epoch 0 saved.
+2021-12-03 15:24:40 | INFO : Epoch #1 finished. Train Loss: 0.0747, Val Loss: 0.0683 with lr: 0.00100
+2021-12-03 15:24:40 | INFO :   .... model of epoch #1 saved.
+2021-12-03 15:39:06 | INFO : Epoch #2 finished. Train Loss: 0.0716, Val Loss: 0.0660 with lr: 0.00100
+2021-12-03 15:39:06 | INFO :   .... model of epoch #2 saved.
+2021-12-03 15:53:32 | INFO : Epoch #3 finished. Train Loss: 0.0701, Val Loss: 0.0650 with lr: 0.00100
+2021-12-03 15:53:32 | INFO :   .... model of epoch #3 saved.
+2021-12-03 16:07:58 | INFO : Epoch #4 finished. Train Loss: 0.0686, Val Loss: 0.0648 with lr: 0.00100
+2021-12-03 16:07:58 | INFO :   .... model of epoch #4 saved.
+2021-12-03 16:22:24 | INFO : Epoch #5 finished. Train Loss: 0.0673, Val Loss: 0.0650 with lr: 0.00100
+2021-12-03 16:36:50 | INFO : Epoch #6 finished. Train Loss: 0.0661, Val Loss: 0.0660 with lr: 0.00100
+2021-12-03 16:51:15 | INFO : Epoch #7 finished. Train Loss: 0.0654, Val Loss: 0.0629 with lr: 0.00100
+2021-12-03 16:51:15 | INFO :   .... model of epoch #7 saved.
+2021-12-03 17:05:41 | INFO : Epoch #8 finished. Train Loss: 0.0650, Val Loss: 0.0628 with lr: 0.00100
+2021-12-03 17:05:41 | INFO :   .... model of epoch #8 saved.
+2021-12-03 17:20:06 | INFO : Epoch #9 finished. Train Loss: 0.0641, Val Loss: 0.0623 with lr: 0.00100
+2021-12-03 17:20:06 | INFO :   .... model of epoch #9 saved.
+2021-12-03 17:34:31 | INFO : Epoch #10 finished. Train Loss: 0.0636, Val Loss: 0.0618 with lr: 0.00100
+2021-12-03 17:34:31 | INFO :   .... model of epoch #10 saved.
+2021-12-03 17:48:57 | INFO : Epoch #11 finished. Train Loss: 0.0630, Val Loss: 0.0626 with lr: 0.00100
+2021-12-03 18:03:23 | INFO : Epoch #12 finished. Train Loss: 0.0627, Val Loss: 0.0646 with lr: 0.00100
+2021-12-03 18:17:49 | INFO : Epoch #13 finished. Train Loss: 0.0619, Val Loss: 0.0650 with lr: 0.00100
+2021-12-03 18:32:14 | INFO : Epoch #14 finished. Train Loss: 0.0615, Val Loss: 0.0642 with lr: 0.00100
+2021-12-03 18:46:40 | INFO : Epoch #15 finished. Train Loss: 0.0612, Val Loss: 0.0625 with lr: 0.00100
+2021-12-03 19:01:06 | INFO : Epoch #16 finished. Train Loss: 0.0608, Val Loss: 0.0619 with lr: 0.00100
+2021-12-03 19:15:31 | INFO : Epoch #17 finished. Train Loss: 0.0560, Val Loss: 0.0599 with lr: 0.00050
+2021-12-03 19:15:31 | INFO :   .... model of epoch #17 saved.
+2021-12-03 19:29:57 | INFO : Epoch #18 finished. Train Loss: 0.0553, Val Loss: 0.0608 with lr: 0.00050
+2021-12-03 19:44:23 | INFO : Epoch #19 finished. Train Loss: 0.0548, Val Loss: 0.0612 with lr: 0.00050
+2021-12-03 19:58:48 | INFO : Epoch #20 finished. Train Loss: 0.0545, Val Loss: 0.0599 with lr: 0.00050
+2021-12-03 20:13:13 | INFO : Epoch #21 finished. Train Loss: 0.0541, Val Loss: 0.0632 with lr: 0.00050
+2021-12-03 20:27:39 | INFO : Epoch #22 finished. Train Loss: 0.0536, Val Loss: 0.0625 with lr: 0.00050
+2021-12-03 20:42:05 | INFO : Epoch #23 finished. Train Loss: 0.0534, Val Loss: 0.0596 with lr: 0.00050
+2021-12-03 20:42:05 | INFO :   .... model of epoch #23 saved.
+2021-12-03 20:56:31 | INFO : Epoch #24 finished. Train Loss: 0.0532, Val Loss: 0.0606 with lr: 0.00050
+2021-12-03 21:10:57 | INFO : Epoch #25 finished. Train Loss: 0.0528, Val Loss: 0.0626 with lr: 0.00050
+2021-12-03 21:25:23 | INFO : Epoch #26 finished. Train Loss: 0.0528, Val Loss: 0.0598 with lr: 0.00050
+2021-12-03 21:39:48 | INFO : Epoch #27 finished. Train Loss: 0.0523, Val Loss: 0.0622 with lr: 0.00050
+2021-12-03 21:54:14 | INFO : Epoch #28 finished. Train Loss: 0.0522, Val Loss: 0.0620 with lr: 0.00050
+2021-12-03 22:08:39 | INFO : Epoch #29 finished. Train Loss: 0.0521, Val Loss: 0.0619 with lr: 0.00050
+2021-12-03 22:23:06 | INFO : Epoch #30 finished. Train Loss: 0.0489, Val Loss: 0.0613 with lr: 0.00025
+2021-12-03 22:37:31 | INFO : Epoch #31 finished. Train Loss: 0.0482, Val Loss: 0.0608 with lr: 0.00025
+2021-12-03 22:51:57 | INFO : Epoch #32 finished. Train Loss: 0.0479, Val Loss: 0.0594 with lr: 0.00025
+2021-12-03 22:51:57 | INFO :   .... model of epoch #32 saved.
+2021-12-03 23:06:22 | INFO : Epoch #33 finished. Train Loss: 0.0475, Val Loss: 0.0614 with lr: 0.00025
+2021-12-03 23:20:48 | INFO : Epoch #34 finished. Train Loss: 0.0475, Val Loss: 0.0601 with lr: 0.00025
+2021-12-03 23:35:14 | INFO : Epoch #35 finished. Train Loss: 0.0472, Val Loss: 0.0612 with lr: 0.00025
+2021-12-03 23:49:41 | INFO : Epoch #36 finished. Train Loss: 0.0470, Val Loss: 0.0597 with lr: 0.00025
+2021-12-04 00:04:07 | INFO : Epoch #37 finished. Train Loss: 0.0467, Val Loss: 0.0630 with lr: 0.00025
+2021-12-04 00:18:32 | INFO : Epoch #38 finished. Train Loss: 0.0467, Val Loss: 0.0614 with lr: 0.00025
+2021-12-04 00:32:58 | INFO : Epoch #39 finished. Train Loss: 0.0447, Val Loss: 0.0603 with lr: 0.00013
+2021-12-04 00:47:23 | INFO : Epoch #40 finished. Train Loss: 0.0442, Val Loss: 0.0613 with lr: 0.00013
+2021-12-04 01:01:48 | INFO : Epoch #41 finished. Train Loss: 0.0440, Val Loss: 0.0603 with lr: 0.00013
+2021-12-04 01:16:14 | INFO : Epoch #42 finished. Train Loss: 0.0441, Val Loss: 0.0613 with lr: 0.00013
+2021-12-04 01:30:39 | INFO : Epoch #43 finished. Train Loss: 0.0438, Val Loss: 0.0612 with lr: 0.00013
+2021-12-04 01:45:05 | INFO : Epoch #44 finished. Train Loss: 0.0437, Val Loss: 0.0628 with lr: 0.00013
+2021-12-04 01:45:05 | INFO :  ### trained model saved in /tsi/clusterhome/cweiss/models/exp200a_traintest_schubert_versionsplit_pitch_cnn_verywide_augall_AdamW.pt 
+
+2021-12-04 01:45:05 | INFO : 
+ 
+ ###################### START TESTING ###################### 
+
+2021-12-04 12:33:18 | INFO :  ### trained model loaded from /tsi/clusterhome/cweiss/models/exp200a_traintest_schubert_versionsplit_pitch_cnn_verywide_augall_AdamW.pt 
+
+2021-12-04 12:33:42 | INFO : file Schubert_D911-07_HU33.npy tested. Cosine sim: 0.7366955414870446
+2021-12-04 12:34:06 | INFO : file Schubert_D911-20_SC06.npy tested. Cosine sim: 0.8551332067671659
+2021-12-04 12:34:30 | INFO : file Schubert_D911-21_SC06.npy tested. Cosine sim: 0.8600227712160279
+2021-12-04 12:34:53 | INFO : file Schubert_D911-21_HU33.npy tested. Cosine sim: 0.8597857101177994
+2021-12-04 12:35:12 | INFO : file Schubert_D911-07_SC06.npy tested. Cosine sim: 0.778058990481949
+2021-12-04 12:35:22 | INFO : file Schubert_D911-02_SC06.npy tested. Cosine sim: 0.7107099860471005
+2021-12-04 12:35:34 | INFO : file Schubert_D911-15_SC06.npy tested. Cosine sim: 0.7910126656238877
+2021-12-04 12:35:48 | INFO : file Schubert_D911-09_HU33.npy tested. Cosine sim: 0.7684830097007405
+2021-12-04 12:36:03 | INFO : file Schubert_D911-14_SC06.npy tested. Cosine sim: 0.8018492563021451
+2021-12-04 12:36:32 | INFO : file Schubert_D911-05_SC06.npy tested. Cosine sim: 0.7709284548281005
+2021-12-04 12:36:47 | INFO : file Schubert_D911-12_SC06.npy tested. Cosine sim: 0.7861368569352857
+2021-12-04 12:37:11 | INFO : file Schubert_D911-11_SC06.npy tested. Cosine sim: 0.7497329682486081
+2021-12-04 12:37:25 | INFO : file Schubert_D911-16_HU33.npy tested. Cosine sim: 0.7450888209833623
+2021-12-04 12:37:57 | INFO : file Schubert_D911-01_SC06.npy tested. Cosine sim: 0.8835128347631644
+2021-12-04 12:38:12 | INFO : file Schubert_D911-09_SC06.npy tested. Cosine sim: 0.7866377182487512
+2021-12-04 12:38:17 | INFO : file Schubert_D911-18_HU33.npy tested. Cosine sim: 0.7439169590933487
+2021-12-04 12:38:26 | INFO : file Schubert_D911-22_HU33.npy tested. Cosine sim: 0.7811895491018831
+2021-12-04 12:38:45 | INFO : file Schubert_D911-23_HU33.npy tested. Cosine sim: 0.7816870103930608
+2021-12-04 12:39:16 | INFO : file Schubert_D911-01_HU33.npy tested. Cosine sim: 0.8640906072854078
+2021-12-04 12:39:40 | INFO : file Schubert_D911-20_HU33.npy tested. Cosine sim: 0.8355382300826233
+2021-12-04 12:39:52 | INFO : file Schubert_D911-16_SC06.npy tested. Cosine sim: 0.7603750687243385
+2021-12-04 12:39:58 | INFO : file Schubert_D911-18_SC06.npy tested. Cosine sim: 0.7559697105489276
+2021-12-04 12:40:05 | INFO : file Schubert_D911-22_SC06.npy tested. Cosine sim: 0.8326771429054322
+2021-12-04 12:40:18 | INFO : file Schubert_D911-08_HU33.npy tested. Cosine sim: 0.6390424322412663
+2021-12-04 12:40:28 | INFO : file Schubert_D911-02_HU33.npy tested. Cosine sim: 0.7398911017519584
+2021-12-04 12:40:40 | INFO : file Schubert_D911-13_SC06.npy tested. Cosine sim: 0.8565765832251161
+2021-12-04 12:41:00 | INFO : file Schubert_D911-14_HU33.npy tested. Cosine sim: 0.8023232170068515
+2021-12-04 12:41:18 | INFO : file Schubert_D911-24_HU33.npy tested. Cosine sim: 0.8362634281673474
+2021-12-04 12:41:38 | INFO : file Schubert_D911-10_HU33.npy tested. Cosine sim: 0.8035033346753008
+2021-12-04 12:41:54 | INFO : file Schubert_D911-04_SC06.npy tested. Cosine sim: 0.6584298465330645
+2021-12-04 12:42:02 | INFO : file Schubert_D911-19_SC06.npy tested. Cosine sim: 0.7957856471785454
+2021-12-04 12:42:18 | INFO : file Schubert_D911-12_HU33.npy tested. Cosine sim: 0.7609124797902388
+2021-12-04 12:42:30 | INFO : file Schubert_D911-08_SC06.npy tested. Cosine sim: 0.6311417042066483
+2021-12-04 12:42:48 | INFO : file Schubert_D911-23_SC06.npy tested. Cosine sim: 0.8294646534126745
+2021-12-04 12:43:15 | INFO : file Schubert_D911-05_HU33.npy tested. Cosine sim: 0.7598631322553691
+2021-12-04 12:43:28 | INFO : file Schubert_D911-15_HU33.npy tested. Cosine sim: 0.7758166757881463
+2021-12-04 12:43:43 | INFO : file Schubert_D911-03_HU33.npy tested. Cosine sim: 0.8321097560510472
+2021-12-04 12:43:57 | INFO : file Schubert_D911-03_SC06.npy tested. Cosine sim: 0.8312619282568585
+2021-12-04 12:44:18 | INFO : file Schubert_D911-24_SC06.npy tested. Cosine sim: 0.8326544936208832
+2021-12-04 12:44:29 | INFO : file Schubert_D911-13_HU33.npy tested. Cosine sim: 0.8440822977740614
+2021-12-04 12:44:53 | INFO : file Schubert_D911-06_SC06.npy tested. Cosine sim: 0.9105873181390068
+2021-12-04 12:45:19 | INFO : file Schubert_D911-06_HU33.npy tested. Cosine sim: 0.883615465176075
+2021-12-04 12:45:44 | INFO : file Schubert_D911-11_HU33.npy tested. Cosine sim: 0.7352921533784758
+2021-12-04 12:46:03 | INFO : file Schubert_D911-04_HU33.npy tested. Cosine sim: 0.6576570041103931
+2021-12-04 12:46:23 | INFO : file Schubert_D911-17_HU33.npy tested. Cosine sim: 0.7403206910852114
+2021-12-04 12:46:42 | INFO : file Schubert_D911-17_SC06.npy tested. Cosine sim: 0.7101400085721513
+2021-12-04 12:47:01 | INFO : file Schubert_D911-10_SC06.npy tested. Cosine sim: 0.8384097011309318
+2021-12-04 12:47:08 | INFO : file Schubert_D911-19_HU33.npy tested. Cosine sim: 0.6648409368999927
+2021-12-04 12:47:08 | INFO : ### Testing done. ################################################ 
+
+2021-12-04 12:47:08 | INFO : #   Results for large test set (10 files) ######################### 
+
+2021-12-04 12:47:08 | INFO : Mean precision:   0.743026361610002
+2021-12-04 12:47:08 | INFO : Mean recall:   0.7678096620214494
+2021-12-04 12:47:08 | INFO : Mean f_measure:   0.7539008919367457
+2021-12-04 12:47:08 | INFO : Mean cosine_sim:   0.7835253970898702
+2021-12-04 12:47:08 | INFO : Mean binary_crossentropy:   0.09034693096382239
+2021-12-04 12:47:08 | INFO : Mean euclidean_distance:   1.0256141836955017
+2021-12-04 12:47:08 | INFO : Mean binary_accuracy:   0.9755249889460553
+2021-12-04 12:47:08 | INFO : Mean soft_accuracy:   0.9678642261667666
+2021-12-04 12:47:08 | INFO : Mean accum_energy:   0.6353657627694346
+2021-12-04 12:47:08 | INFO : Mean roc_auc_measure:   0.9842351835195963
+2021-12-04 12:47:08 | INFO : Mean average_precision_score:   0.8106484753983012
+2021-12-04 12:47:08 | INFO : Mean Precision:   0.743026361610002
+2021-12-04 12:47:08 | INFO : Mean Recall:   0.7678096620214494
+2021-12-04 12:47:08 | INFO : Mean Accuracy:   0.6110962362145931
+2021-12-04 12:47:08 | INFO : Mean Substitution Error:   0.10762698775994693
+2021-12-04 12:47:08 | INFO : Mean Miss Error:   0.1245633502186036
+2021-12-04 12:47:08 | INFO : Mean False Alarm Error:   0.1649091089627973
+2021-12-04 12:47:08 | INFO : Mean Total Error:   0.3970994469413478
+2021-12-04 12:47:08 | INFO : Mean Chroma Precision:   0.7720555247680659
+2021-12-04 12:47:08 | INFO : Mean Chroma Recall:   0.7982787916783688
+2021-12-04 12:47:08 | INFO : Mean Chroma Accuracy:   0.6486141973405541
+2021-12-04 12:47:08 | INFO : Mean Chroma Substitution Error:   0.07715785810302773
+2021-12-04 12:47:08 | INFO : Mean Chroma Miss Error:   0.1245633502186036
+2021-12-04 12:47:08 | INFO : Mean Chroma False Alarm Error:   0.1649091089627973
+2021-12-04 12:47:08 | INFO : Mean Chroma Total Error:   0.3666303172844287
+2021-12-04 12:47:08 | INFO : 
+
+2021-12-04 12:47:08 | INFO : Framewise precision:   0.7543784270055188
+2021-12-04 12:47:08 | INFO : Framewise recall:   0.7793601158368436
+2021-12-04 12:47:08 | INFO : Framewise f_measure:   0.7654246781203202
+2021-12-04 12:47:08 | INFO : Framewise cosine_sim:   0.793867540464897
+2021-12-04 12:47:08 | INFO : Framewise binary_crossentropy:   0.08703863441861459
+2021-12-04 12:47:08 | INFO : Framewise euclidean_distance:   1.0115026868891646
+2021-12-04 12:47:08 | INFO : Framewise binary_accuracy:   0.9762885979996606
+2021-12-04 12:47:08 | INFO : Framewise soft_accuracy:   0.9686559539534753
+2021-12-04 12:47:08 | INFO : Framewise accum_energy:   0.6489238706770744
+2021-12-04 12:47:08 | INFO : Framewise roc_auc_measure:   0.9858396841601135
+2021-12-04 12:47:08 | INFO : Framewise average_precision_score:   0.8247570251113898
+2021-12-04 12:47:08 | INFO : Framewise Precision:   0.7543784270055188
+2021-12-04 12:47:08 | INFO : Framewise Recall:   0.7793601158368436
+2021-12-04 12:47:08 | INFO : Framewise Accuracy:   0.6259780665712633
+2021-12-04 12:47:08 | INFO : Framewise Substitution Error:   0.09999589313448275
+2021-12-04 12:47:08 | INFO : Framewise Miss Error:   0.12064399102867364
+2021-12-04 12:47:08 | INFO : Framewise False Alarm Error:   0.16089745744522688
+2021-12-04 12:47:08 | INFO : Framewise Total Error:   0.3815373416083832
+2021-12-04 12:47:08 | INFO : Framewise Chroma Precision:   0.7813237951095895
+2021-12-04 12:47:08 | INFO : Framewise Chroma Recall:   0.8077065465164229
+2021-12-04 12:47:08 | INFO : Framewise Chroma Accuracy:   0.6615076925701779
+2021-12-04 12:47:08 | INFO : Framewise Chroma Substitution Error:   0.07164946245490349
+2021-12-04 12:47:08 | INFO : Framewise Chroma Miss Error:   0.12064399102867364
+2021-12-04 12:47:08 | INFO : Framewise Chroma False Alarm Error:   0.16089745744522688
+2021-12-04 12:47:08 | INFO : Framewise Chroma Total Error:   0.353190910928804
