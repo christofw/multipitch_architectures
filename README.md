@@ -199,4 +199,4 @@ Experiments from __Section IV.E (Fig. 7) - Cross-Dataset Study on Big Mix Datase
 Run scripts using e.g. the following commands:  
 __conda activate multipitch_architectures__  
 __export CUDA_VISIBLE_DEVICES=1__  
-__python experiments/Exp1_SectionIV-B/exp126a_musicnet_cnn_basic.py
+__python experiments/Exp1_SectionIV-B/exp126a_musicnet_cnn_basic.py__
