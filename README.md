@@ -3,8 +3,9 @@
 This is a pytorch code repository accompanying the following paper:  
 
 > Christof Weiß and Geoffroy Peeters  
-> _Deep-Learning Architectures for Multi-Pitch Estimation: Towards Reliable Evaluation_  
-> submitted to IEEE/ACM Transactions on Audio, Speech &amp; Language Processing, 2022
+> _Comparing Deep Models and Evaluation Strategies for Multi-Pitch Estimation in Music Recordings_  
+> IEEE/ACM Transactions on Audio, Speech &amp; Language Processing, 2022
+> https://ieeexplore.ieee.org/document/9865174
 
 This repository only contains exemplary code and pre-trained models for most of the paper's experiments as well as some individual examples. All datasets used in the paper are publicly available (at least partially):
 * [MusicNet](https://zenodo.org/record/5120004)
@@ -13,6 +14,8 @@ This repository only contains exemplary code and pre-trained models for most of 
 * [Bach10](http://www2.ece.rochester.edu/projects/air/resource.html)
 * [PHENICX-Anechoic](https://www.upf.edu/web/mtg/phenicx-anechoic)
 * [Choral Singing Dataset](https://zenodo.org/record/2649950#.Yd_3hWhKhaQ)
+* [RWC Classical](https://staff.aist.go.jp/m.goto/RWC-MDB/)
+
   
 For details and references, please see the paper.
   
