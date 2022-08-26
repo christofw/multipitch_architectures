@@ -4,7 +4,7 @@ This is a pytorch code repository accompanying the following paper:
 
 > Christof Weiß and Geoffroy Peeters  
 > _Comparing Deep Models and Evaluation Strategies for Multi-Pitch Estimation in Music Recordings_  
-> IEEE/ACM Transactions on Audio, Speech &amp; Language Processing, 2022
+> IEEE/ACM Transactions on Audio, Speech &amp; Language Processing, 2022  
 > https://ieeexplore.ieee.org/document/9865174
 
 This repository only contains exemplary code and pre-trained models for most of the paper's experiments as well as some individual examples. All datasets used in the paper are publicly available (at least partially):
